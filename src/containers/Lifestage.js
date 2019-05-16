@@ -1,9 +1,14 @@
 import React from 'react';
-import { NavLink } from 'react-router-dom';
-import { getLifestages } from '../actions';
+import { Redirect } from 'react-router-dom';
+import { getLifestages, getUserLifestages } from '../actions';
 import { connect } from 'react-redux';
+import GroupList from '../components/GroupList'
 
 class Lifestage extends React.Component {
+
+    state ={
+        userLifestages: []
+    }
 
     componentDidMount = () => {
         fetch('http://localhost:3000/lifestages')
@@ -13,15 +18,29 @@ class Lifestage extends React.Component {
 
    handleSubmit = (e) => { 
         e.preventDefault();
+        this.props.getUserLifestages(this.state.userLifestages)
         // need to post
-        
+        this.props.history.push('/grouplist')
+    }
+    
+    handleChange = (e) => {
+        if (e.target.checked){
+           this.setState({
+               userLifestages: [...this.state.userLifestages, parseInt(e.target.name)]
+           })
+        } else {
+            this.setState({
+                userLifestages: this.state.userLifestages.filter(uls => uls !== e.target.name)
+            })
+        }
     }
 
+    
     renderLifestage = () => {
         return this.props.lifestage.map(ls => {
             return (
-                <div>
-                    <input type="checkbox" name={ls.name} value={ls.name} />
+                <div key={ls.id}>
+                    <input type="checkbox" onChange={this.handleChange} name={ls.id} value={ls.name} />
                     {ls.name}
                 </div>
             )
@@ -29,13 +48,13 @@ class Lifestage extends React.Component {
     }
 
     render(){
-        
+        console.log(this.props.userLifestages)
         return (
             <div>
                 <form onSubmit={this.handleSubmit} action="">
                     {this.renderLifestage()}
                     
-                    <NavLink to='/grouplist'> <button>Submit</button> </NavLink> 
+                    <button>Submit</button>
                 </form>
                
     
@@ -57,7 +76,8 @@ class Lifestage extends React.Component {
 
 const mapStateToProps = (state) => {
     return {
-        lifestage: state.lifestage
+        lifestage: state.lifestage,
+        userLifestages: state.userLifestages
     }
 }
 
@@ -65,6 +85,9 @@ const mapDispatchToProps = (dispatch) => {
     return {
         getLifestages: (lifestages) => {
             dispatch(getLifestages(lifestages))
+        },
+        getUserLifestages: (userLifestages) => {
+            dispatch(getUserLifestages(userLifestages))
         }
     }
 }

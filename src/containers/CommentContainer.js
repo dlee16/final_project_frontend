@@ -8,7 +8,6 @@ const CommentContainer = (props) => {
         })
     }
 
-    console.log(props)
     return (
         <div>
             {renderComments()}

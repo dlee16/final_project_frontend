@@ -19,6 +19,7 @@ class GroupList extends React.Component {
     }
 
     render(){
+        console.log(this.props.groups)
         return (
             <div>
                 <NavLink to='/group/new'>Create new group</NavLink>
