@@ -13,13 +13,13 @@ class GroupList extends React.Component {
     }
      
     renderGroups = () => {
-        return this.props.group.map( group => {
+        const group = this.props.group.filter(group => this.props.userLifestages.includes(group.lifestage_id))
+        return group.map( group => {
             return <Group key={group.id} group={group}/> 
         })
     }
 
     render(){
-        console.log(this.props.groups)
         return (
             <div>
                 <NavLink to='/group/new'>Create new group</NavLink>
@@ -32,14 +32,14 @@ class GroupList extends React.Component {
 const mapStateToProps = (state) => {
     return {
         // loggedIn: !!state.currentUser.id,
-        group: state.group
+        group: state.group,
+        userLifestages: state.userLifestages
     }
 }
 
 const mapDispatchToProps = (dispatch) => {
     return {
         getGroups: (groups) => {
-            // console.log("calling dispatch")
             dispatch(getGroups(groups))
         }
     }

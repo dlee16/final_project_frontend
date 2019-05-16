@@ -1,8 +1,6 @@
 import React from 'react';
-import { Redirect } from 'react-router-dom';
 import { getLifestages, getUserLifestages } from '../actions';
 import { connect } from 'react-redux';
-import GroupList from '../components/GroupList'
 
 class Lifestage extends React.Component {
 
@@ -30,7 +28,7 @@ class Lifestage extends React.Component {
            })
         } else {
             this.setState({
-                userLifestages: this.state.userLifestages.filter(uls => uls !== e.target.name)
+                userLifestages: this.state.userLifestages.filter(uls => uls !== parseInt(e.target.name))
             })
         }
     }
@@ -48,7 +46,6 @@ class Lifestage extends React.Component {
     }
 
     render(){
-        console.log(this.props.userLifestages)
         return (
             <div>
                 <form onSubmit={this.handleSubmit} action="">
