@@ -1,29 +1,64 @@
 import React from 'react'; 
-import { getGroups } from '../actions';
+import { getGroups, setComments, addComment} from '../actions';
 import { connect } from 'react-redux';
 import CommentContainer from '../containers/CommentContainer'
+import CommentForm from './CommentForm'
 
 class GroupContent extends React.Component{
 
     componentDidMount() {
-        fetch(`http://localhost:3000/groups`)
-            .then(res => res.json())
-            .then(this.props.getGroups)
+        fetch(`http://localhost:3000/comments`)
+        .then(res => res.json())
+        .then(this.props.setComments)
+    }
+
+    handleChange = (e) => {
+        this.setState({
+            input: e.target.value
+        })
+    }
+
+    addComment = (user_id, group_id, input) => {
+        fetch('http://localhost:3000/comments', {
+            method: 'POST', 
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+                user_id,
+                group_id,
+                user_comment: input
+            }),
+        })
+        .then(res => res.json())
+        .then(this.props.addComment)
+    }
+
+    handleSubmit = (input) => {
+        this.addComment(1, parseInt(this.props.match.params.id), input)
     }
 
     renderComments = () => {
-        if (this.props.group.length !==0 ){
-            const group = this.props.group.find(group => {
-                return group.id === parseInt(this.props.match.params.id) })
-            return <CommentContainer key={group.id} group={group.comments} /> 
+        if (this.props.comments.length !== 0) {
+            const group = this.props.comments.filter(comment => {
+                return comment.group_id === parseInt(this.props.match.params.id)
+            }) 
+            if (group.length > 0){
+                return <CommentContainer key={group.id} group={group} />
+            } else{
+                return "Be the first to comment!"
+            }
         }
     }
-
-
+        
     render(){
+        console.log(this.props.comments)
+      
         return (
             <div>
                 {this.renderComments()}
+                <CommentForm handleSubmit={this.handleSubmit} /> 
+                <button onClick={this.handleBackButton}>Back to main</button>
             </div>
         )
     }
@@ -32,7 +67,8 @@ class GroupContent extends React.Component{
 const mapStateToProps = (state) => {
     return {
         // loggedIn: !!state.currentUser.id,
-        group: state.group
+        group: state.group,
+        comments: state.comments
     }
 }
 
@@ -40,6 +76,12 @@ const mapDispatchToProps = (dispatch) => {
     return {
         getGroups: (groups) => {
             dispatch(getGroups(groups))
+        },
+        setComments: (comments) => {
+            dispatch(setComments(comments))
+        },
+        addComment: (comments) => {
+            dispatch(addComment(comments))
         }
     }
 }

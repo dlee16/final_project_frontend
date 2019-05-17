@@ -1,3 +1,6 @@
 export const GET_GROUPS = "GET_GROUPS"
 export const GET_LIFESTAGES = "GET_LIFESTAGES"
 export const GET_USERLIFESTAGES = "GET_USERLIFESTAGES"
+export const ADD_GROUP = "ADD_GROUP"
+export const SET_COMMENTS = "SET_COMMENTS"
+export const ADD_COMMENT = "ADD_COMMENT"
