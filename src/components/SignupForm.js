@@ -16,11 +16,10 @@ class SignupForm extends React.Component {
     }
 
 
-    handleSubmit = (e) => {
-        e.preventDefault()
-        this.props.history.push('/lifestage')
+    handleSubmit = () => {
+        this.props.createUser(this.state)
+        this.props.history.push('/lifestages')
     }
-
 
     render(){
         return(
@@ -30,7 +29,7 @@ class SignupForm extends React.Component {
                     <input type="text" onChange={this.handleChange} value={this.state.email} name="email" placeholder="Email"/>
                     <input type="text" onChange={this.handleChange} value={this.state.funFact} name="funFact" placeholder="Fun Fact"/>
                     <input type="text" onChange={this.handleChange} value={this.state.username} name="username" placeholder="Username"/>
-                    <input type="text" onChange={this.handleChange} value={this.state.password} name="password" placeholder="Password"/>
+                    <input type="password" onChange={this.handleChange} value={this.state.password} name="password" placeholder="Password"/>
                     <button>Sign up!</button>
                 </form>
             </div>

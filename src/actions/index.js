@@ -4,7 +4,9 @@ import {
     GET_USERLIFESTAGES,
     ADD_GROUP,
     SET_COMMENTS,
-    ADD_COMMENT
+    ADD_COMMENT,
+    GET_CURRENTUSER,
+    JOIN_GROUP
 } from './types'
 
 export function getGroups(groups) {
@@ -46,5 +48,19 @@ export function addComment(comment) {
     return {
         type: ADD_COMMENT,
         payload: comment
+    }
+}
+
+export function getCurrentUser(token) {
+    return {
+        type: GET_CURRENTUSER,
+        payload: token
+    }
+}
+
+export function joinGroup(group) {
+    return {
+        type: JOIN_GROUP,
+        payload: group
     }
 }

@@ -5,7 +5,7 @@ import { connect } from 'react-redux';
 class Lifestage extends React.Component {
 
     state ={
-        userLifestages: []
+        userLifestages: ""
     }
 
     componentDidMount = () => {
@@ -14,11 +14,27 @@ class Lifestage extends React.Component {
         .then(this.props.getLifestages)
     }
 
+
+    addUserLifestage = (id, user) => {
+        fetch('http://localhost:3000/user_lifestages', {
+            method: 'POST',
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+                lifestage_id: id,
+                user_id: user,
+            }),
+        })
+            .then(res => res.json())
+            .then(this.props.getUserLifestages)
+    }
+
+
    handleSubmit = (e) => { 
         e.preventDefault();
-        this.props.getUserLifestages(this.state.userLifestages)
-        // need to post
-        this.props.history.push('/grouplist')
+        this.addUserLifestage(this.state.userLifestages[0], this.props.currentUser.id )
+       this.props.history.push(`/${this.state.userLifestages[0]}/grouplist`)
     }
     
     handleChange = (e) => {
@@ -48,7 +64,7 @@ class Lifestage extends React.Component {
     render(){
         return (
             <div>
-                <form onSubmit={this.handleSubmit} action="">
+                <form onSubmit={this.handleSubmit}>
                     {this.renderLifestage()}
                     
                     <button>Submit</button>

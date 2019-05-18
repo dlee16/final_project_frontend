@@ -18,9 +18,9 @@ class GroupList extends React.Component {
     }
      
     renderGroups = () => {
-        const group = this.props.group.filter(group => this.props.userLifestages.includes(group.lifestage_id))
-        return group.map( group => {
-            return <Group key={group.id} group={group}/> 
+        const grp = this.props.group.filter(group => parseInt(this.props.userLifestages.lifestage_id) === parseInt(group.lifestage_id))
+        return grp.map( group => {
+            return <Group key={group.id} group={group} currentUser={this.props.currentUser}/> 
         })
     }
 
@@ -38,7 +38,7 @@ class GroupList extends React.Component {
 
     renderSelectGroupOptions = () => {
         if (this.props.group.length !==0){
-            const ulsg = this.props.group.filter(group => this.props.userLifestages.includes(group.lifestage_id))
+            const ulsg = this.props.group.filter(group => parseInt(this.props.userLifestages.lifestage_id) === parseInt(group.lifestage_id))
            return ulsg.map( group => {
                return <option key={group.id} value={group.lifestage_id}>{group.lifestage_name}</option>
            })
@@ -90,7 +90,6 @@ class GroupList extends React.Component {
 
 const mapStateToProps = (state) => {
     return {
-        // loggedIn: !!state.currentUser.id,
         group: state.group,
         userLifestages: state.userLifestages
     }
