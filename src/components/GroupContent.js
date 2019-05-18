@@ -35,7 +35,7 @@ class GroupContent extends React.Component{
     }
 
     handleSubmit = (input) => {
-        this.addComment(1, parseInt(this.props.match.params.id), input)
+        this.addComment(this.props.currentUser.id, parseInt(this.props.match.params.id), input)
     }
 
     renderComments = () => {
@@ -51,9 +51,7 @@ class GroupContent extends React.Component{
         }
     }
         
-    render(){
-        console.log(this.props.comments)
-      
+    render(){      
         return (
             <div>
                 {this.renderComments()}
