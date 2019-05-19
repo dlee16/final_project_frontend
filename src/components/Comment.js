@@ -3,7 +3,7 @@ import React from 'react'
 const Comment = (props) => {
     return(
         <div>
-            <li> {props.comment} </li>
+            <li> {props.comment} -  commented by: {props.user} </li>
         </div>
     )
 }

@@ -1,5 +1,5 @@
 import React from 'react'; 
-import { NavLink, withRouter} from 'react-router-dom';
+import { withRouter} from 'react-router-dom';
 import { connect } from 'react-redux'
 import { joinGroup } from '../actions';
 
@@ -41,6 +41,7 @@ class Group extends React.Component {
 
 const mapStateToProps = (state) => {
     return {
+        userLifestages: state.userLifestages,
         joinGroup: state.joinGroup
     }
 }

@@ -4,7 +4,8 @@ const defaultState = {
     lifestage: [],
     userLifestages:[],
     currentUser: null,
-    joinedGroups: []
+    joinedGroups: [],
+    userGroups:[]
 }
 
 function reducer(state = defaultState, action) {
@@ -26,6 +27,8 @@ function reducer(state = defaultState, action) {
             return {...state, currentUser: action.payload}
         case "JOIN_GROUP": 
             return {...state, joinedGroups: [...state.joinedGroups, action.payload] }
+        case "FIND_USER_GROUP":
+            return { ...state, userGroups: action.payload }
         default:
             return state
     }

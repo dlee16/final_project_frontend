@@ -8,6 +8,7 @@ import { Route, Switch, withRouter } from 'react-router-dom';
 import GroupList from './components/GroupList';
 import Group from './components/Group';
 import GroupContent from './components/GroupContent';
+import UserGroupList from './components/UserGroupList';
 import SignupForm from './components/SignupForm';
 import Profile from './components/Profile';
 
@@ -94,7 +95,9 @@ class App extends React.Component {
 
           <Route path={this.state.currentUser ? `/${this.state.currentUser.id}/profile` : '/login'} render={(routeProps) => <Profile {...routeProps} currentUser={this.state.currentUser}/> }/>  
 
-          <Route path={this.state.currentUser ? '/:lifestage_id/grouplist' : '/login'} render={(routeProps) => <GroupList {...routeProps} currentUser={this.state.currentUser} />}/>  
+          <Route path={this.state.currentUser ? '/lifestages/:lifestage_id/grouplist' : '/login'} render={(routeProps) => <GroupList {...routeProps} currentUser={this.state.currentUser} />}/>  
+
+          <Route path={this.state.currentUser ? '/lifestages/:lifestage_id/usergrouplist' : '/login'} render={(routeProps) => <UserGroupList {...routeProps} currentUser={this.state.currentUser} />}/>  
 
           <Route path={this.state.currentUser ? '/lifestages' : '/login'} render={(routeProps) => <Lifestage {...routeProps} currentUser={this.state.currentUser} />} /> 
 

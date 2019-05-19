@@ -38,6 +38,10 @@ class GroupContent extends React.Component{
         this.addComment(this.props.currentUser.id, parseInt(this.props.match.params.id), input)
     }
 
+    handleBackButton = () => {
+        this.props.history.push(`/${this.props.currentUser.id}/profile`)
+    }
+
     renderComments = () => {
         if (this.props.comments.length !== 0) {
             const group = this.props.comments.filter(comment => {
@@ -56,7 +60,7 @@ class GroupContent extends React.Component{
             <div>
                 {this.renderComments()}
                 <CommentForm handleSubmit={this.handleSubmit} /> 
-                <button onClick={this.handleBackButton}>Back to main</button>
+                <button onClick={this.handleBackButton}>Back to Profile</button>
             </div>
         )
     }
