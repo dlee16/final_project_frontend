@@ -34,7 +34,7 @@ class Lifestage extends React.Component {
    handleSubmit = (e) => { 
         e.preventDefault();
         this.addUserLifestage(this.state.userLifestages[0], this.props.currentUser.id )
-       this.props.history.push(`/${this.state.userLifestages[0]}/grouplist`)
+       this.props.history.push(`/lifestages/${this.state.userLifestages[0]}/grouplist`)
     }
     
     handleChange = (e) => {

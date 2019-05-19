@@ -6,7 +6,8 @@ import {
     SET_COMMENTS,
     ADD_COMMENT,
     GET_CURRENTUSER,
-    JOIN_GROUP
+    JOIN_GROUP,
+    FIND_USER_GROUP
 } from './types'
 
 export function getGroups(groups) {
@@ -61,6 +62,13 @@ export function getCurrentUser(token) {
 export function joinGroup(group) {
     return {
         type: JOIN_GROUP,
+        payload: group
+    }
+}
+
+export function findUserGroup(group) {
+    return {
+        type: FIND_USER_GROUP,
         payload: group
     }
 }
