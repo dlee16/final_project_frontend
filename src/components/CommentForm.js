@@ -22,11 +22,14 @@ class CommentForm extends React.Component {
 
     render(){
         return(
-            <div>
-                <form onSubmit={this.handleSubmit}>
-                    <textarea onChange={this.handleChange} value={this.state.input} cols="30" rows="10"></textarea>
-                    <button>Leave a comment!</button>
-                </form>
+            <div className ="ui center align container">
+                <div className="seven wide column">
+                    <form className="ui reply form" onSubmit={this.handleSubmit}>
+                        <textarea onChange={this.handleChange} value={this.state.input}></textarea>
+                        <button className="ui prof icon button">
+                            <i className="icon edit"></i>Leave a comment!</button>
+                    </form>
+                </div>
             </div>
         )
     }
