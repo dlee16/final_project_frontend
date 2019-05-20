@@ -53,7 +53,7 @@ class Lifestage extends React.Component {
     renderLifestage = () => {
         return this.props.lifestage.map(ls => {
             return (
-                <div key={ls.id}>
+                <div key={ls.id} className="ui card ">
                     <input type="checkbox" onChange={this.handleChange} name={ls.id} value={ls.name} />
                     {ls.name}
                 </div>
@@ -63,8 +63,9 @@ class Lifestage extends React.Component {
 
     render(){
         return (
-            <div>
+            <div className="ui stackable center aligned grid container">
                 <form onSubmit={this.handleSubmit}>
+                    <h2>Lifestages:</h2>
                     {this.renderLifestage()}
                     
                     <button>Submit</button>

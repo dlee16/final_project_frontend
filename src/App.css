@@ -31,3 +31,44 @@
     transform: rotate(360deg);
   }
 }
+
+.ui.fluid.large.submit.button{
+  background-color: #0bc2c9;
+  color: white;
+}
+
+.ui.login.image.header{
+  color: #e8347d;
+}
+
+.ui.fluid.submit.button{
+  background-color: #00B0F5;
+  color: white;
+}
+
+.group.card{
+  background-color: #00B0F5
+}
+
+#borderimg1 {
+  border: 10px solid transparent;
+  padding: 15px;
+  border-image: url(/border.png) 30 round;
+}
+
+#borderimg2 {
+  border: 10px solid transparent;
+  padding: 15px;
+  border-image: url(/border.png) 20% round;
+}
+
+#borderimg3 {
+  border: 10px solid transparent;
+  padding: 15px;
+  border-image: url(/comment2.png) 45% stretch;
+}
+
+.ui.prof.button {
+  background-color: #0bc2c9;
+  color: white;
+}

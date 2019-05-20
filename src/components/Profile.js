@@ -3,6 +3,7 @@ import { NavLink } from 'react-router-dom';
 import { connect } from 'react-redux'; 
 import { getLifestages, getUserLifestages, findUserGroup } from '../actions';
 import DeleteUserLifestage from './DeleteUserLifestage'
+import UpdateUser from './UpdateUser'
 
 class Profile extends React.Component {
   
@@ -63,27 +64,50 @@ class Profile extends React.Component {
 
         return currUserLifestage.map(ls => {
             return (
-                <div key={ls.id}>
-                    <h2>{ls.name}</h2>
-                    <button onClick={this.handleAllGroupsClick} name={ls.name} >See All Groups</button>
-                    <button onClick = {this.handleUserGroupClick} name={ls.id} >See Your Groups</button>
-                    <button onClick={this.handleDeleteClick}> Leave Lifestage</button>
+                <div key={ls.id} className="ui card" id="borderimg1">
+                
+                        <div className="content">
+                            <h2 className="header">{ls.name}</h2>
+                            <button onClick={this.handleAllGroupsClick} name={ls.name} className="ui fluid submit button" >See All Groups</button>
+                            <br/>
+                            <button onClick={this.handleUserGroupClick} name={ls.id} className="ui fluid submit button" >See Your Groups</button>
+                            <br/>
+                            <button onClick={this.handleDeleteClick} className="ui fluid submit button"> Leave Lifestage</button>
+                    
+                    </div>
                 </div>
+               
             )
         })
     }
 
 
     render(){
-        console.log("userlife", this.props.userGroups)
         if (this.props.currentUser){
             return (
-                <div>
-                    <h2>Welcome {this.props.currentUser ? this.props.currentUser.name : null} ! </h2>
-                    <NavLink to='/lifestages'> <button>See More Lifestages</button></NavLink>
-                    <br/>
-                    <h2>Your lifestages:</h2>
-                    {this.renderLifestage()}
+                <div className="ui center align container">
+                    <div className="ui vertically divided stackable grid">
+                            <div className="eight wide column">
+                            
+                                    <h2>Welcome {this.props.currentUser ? this.props.currentUser.name : null} ! </h2>
+                                    <h3>My Profile:</h3> 
+                                    <img src="../profile.jpg" width="200px" height="200px" alt="broken"/>
+                                   <UpdateUser currentUser={this.props.currentUser} /> 
+                            </div>
+                    
+                            <div className="five wide column">
+                                <h2>Your lifestages:</h2>
+                            <div className="ui prof animated button">
+                                 <NavLink to='/lifestages'> <button className="ui prof button">
+                                    <div className="visible content">See More Lifestages</div>
+                                    <div className="hidden content">
+                                        <i className="right arrow icon"></i>
+                                    </div>
+                                </button></NavLink>
+                            </div>
+                                {this.renderLifestage()}
+                            </div>
+                    </div>
                 </div>
             )
         } else {

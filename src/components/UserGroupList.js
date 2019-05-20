@@ -26,7 +26,7 @@ class UserGroupList extends React.Component{
 
     render(){
         return(
-            <div>
+            <div className="ui stackable center aligned grid container">
                 {this.renderGroups()}
             </div>
         )

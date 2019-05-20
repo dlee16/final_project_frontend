@@ -39,7 +39,7 @@ class GroupList extends React.Component {
 
     renderSelectGroupOptions = () => {
         if (this.props.group.length !==0){
-            const ulsg = this.props.group.filter(group => parseInt(this.props.userLifestages.lifestage_id) === parseInt(group.lifestage_id))
+            const ulsg = this.props.group.filter(group => parseInt(this.props.userLifestages.lifestage_id) === parseInt(group.lifestage_id) || this.props.userLifestages.id === parseInt(group.lifestage_id))
            return ulsg.map( group => {
                return <option key={group.id} value={group.lifestage_id}>{group.lifestage_name}</option>
            })
@@ -69,10 +69,10 @@ class GroupList extends React.Component {
     }
 
     render(){
-        console.log("usergroups",this.props.userGroups)
         return (
             <div>
                 <label >Don't see what you're looking for? Start a new group!</label>
+                
                 <form onSubmit={this.handleSubmit} action="">
                     <input type="text" placeholder="Group name" onChange={this.handleChange} name="groupName" value={this.state.groupName}/>
                     <input type="text" placeholder="Group description" onChange={this.handleChange} name="groupDescription" value={this.state.groupDesc}/>
@@ -82,9 +82,12 @@ class GroupList extends React.Component {
                         {this.renderSelectGroupOptions()}
                     </select>
 
-                    <input type="submit" value="submit"/>
+                    <input type="submit" className="ui prof button" value="submit"/>
                 </form>
-                {this.renderGroups()}
+                <br/>
+                <div className="ui stackable center aligned grid container">
+                    {this.renderGroups()}
+                </div>
             </div>
         )
     }

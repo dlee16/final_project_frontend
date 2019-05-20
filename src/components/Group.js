@@ -27,14 +27,20 @@ class Group extends React.Component {
 
     render(){
         return (
-            <div>
-               <label>Topic name:</label>
-               { this.props.group.name} <br/>
-                Topic image <br/>
-                <label>Topic Description:</label>
-                {this.props.group.description}
-                <button onClick={this.handleClick}>Join</button>
-            </div>
+                <div className="two column row">
+                    <div className="ui card" id="borderimg2">
+                        <div className="seven wide column">
+                            <div className="content">
+                                <h2>{this.props.group.name}</h2> <br/>
+                                <img src="../topic.jpg" height="100px" width="100px" alt="broken"/>
+                                <br/>
+                                <p>{this.props.group.description}</p>
+                                <button onClick={this.handleClick} className="ui fluid submit button">Join</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+           
         )
     }
 }
