@@ -57,10 +57,11 @@ class GroupContent extends React.Component{
         
     render(){      
         return (
-            <div className="ui stackable center aligned grid container">
-                {this.renderComments()}
-                <CommentForm handleSubmit={this.handleSubmit} /> 
-                <button onClick={this.handleBackButton} className="ui prof button">Back to Profile</button>
+            <div className="ui center aligned container">
+                <button>See all members of group</button>
+                    {this.renderComments()}
+                    <CommentForm handleSubmit={this.handleSubmit} /> 
+                    <button onClick={this.handleBackButton} className="ui prof button">Back to Profile</button>
             </div>
         )
     }

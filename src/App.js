@@ -11,6 +11,8 @@ import GroupContent from './components/GroupContent';
 import UserGroupList from './components/UserGroupList';
 import SignupForm from './components/SignupForm';
 import Profile from './components/Profile';
+import { getLifestages, getUserLifestages } from './actions';
+import { connect } from 'react-redux'; 
 
 class App extends React.Component {
   state = {
@@ -29,23 +31,27 @@ class App extends React.Component {
   componentDidMount(){
     const token = localStorage.getItem("token")
     if (token){
-      fetch("http://localhost:3000/auto_login", {
+      Promise.all([fetch("http://localhost:3000/auto_login", {
         headers: {
           "Authorization": token
         }
-      })
-      .then(res => res.json())
-      .then((response) => {
-        if (response.errors){
-          alert(response.errors)
-        } else {
-          this.setState({
-            currentUser: response
-          })
-        }
+      }), fetch('http://localhost:3000/lifestages'), fetch('http://localhost:3000/memberships')])
+        .then(([res1, res2, res3]) => {
+          return Promise.all([res1.json(), res2.json(), res3.json()])
+        })
+        .then(([res1, res2, res3]) => {
+          if (res1.errors){
+            alert(res1.errors)
+          } else {
+            this.setState({
+              currentUser: res1
+            })
+          this.props.getLifestages(res2)
+          this.props.getUserLifestages(res3)
+          }
         })
       }
-    }
+  }
 
   createUser = (user) => {
     fetch("http://localhost:3000/users", {
@@ -85,6 +91,7 @@ class App extends React.Component {
     })
   }
 
+
   render() {
     return (
       <div className="App">
@@ -115,4 +122,22 @@ class App extends React.Component {
   }
 }
 
-export default withRouter(App);
+  const mapStateToProps = (state) => {
+    return {
+      lifestage: state.lifestage,
+      userLifestages: state.userLifestages
+    }
+  }
+
+  const mapDispatchToProps = (dispatch) => {
+    return {
+      getLifestages: (lifestages) => {
+        dispatch(getLifestages(lifestages))
+      },
+      getUserLifestages: (userLifestages) => {
+        dispatch(getUserLifestages(userLifestages))
+      }
+    }
+  }
+
+  export default connect(mapStateToProps, mapDispatchToProps)(withRouter(App));
