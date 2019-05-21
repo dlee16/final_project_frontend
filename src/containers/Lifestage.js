@@ -8,11 +8,11 @@ class Lifestage extends React.Component {
         userLifestages: ""
     }
 
-    componentDidMount = () => {
-        fetch('http://localhost:3000/lifestages')
-        .then(res => res.json())
-        .then(this.props.getLifestages)
-    }
+    // componentDidMount = () => {
+    //     fetch('http://localhost:3000/lifestages')
+    //     .then(res => res.json())
+    //     .then(this.props.getLifestages)
+    // }
 
 
     addUserLifestage = (id, user) => {
@@ -54,7 +54,7 @@ class Lifestage extends React.Component {
         return this.props.lifestage.map(ls => {
             return (
                 <div key={ls.id} className="ui card ">
-                    <input type="checkbox" onChange={this.handleChange} name={ls.id} value={ls.name} />
+                    <input type="radio" onChange={this.handleChange} name={ls.id} value={ls.name} />
                     {ls.name}
                 </div>
             )
@@ -68,7 +68,7 @@ class Lifestage extends React.Component {
                     <h2>Lifestages:</h2>
                     {this.renderLifestage()}
                     
-                    <button>Submit</button>
+                    <button>Join!</button>
                 </form>
                
     

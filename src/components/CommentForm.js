@@ -22,7 +22,7 @@ class CommentForm extends React.Component {
 
     render(){
         return(
-            <div className ="ui center align container">
+            <div className="ui stackable center aligned grid container">
                 <div className="seven wide column">
                     <form className="ui reply form" onSubmit={this.handleSubmit}>
                         <textarea onChange={this.handleChange} value={this.state.input}></textarea>

@@ -5,7 +5,9 @@ const defaultState = {
     userLifestages:[],
     currentUser: null,
     joinedGroups: [],
-    userGroups:[]
+    userGroups:[],
+    newlySetLifestage:[],
+    profileUserLifestages: []
 }
 
 function reducer(state = defaultState, action) {
@@ -16,7 +18,7 @@ function reducer(state = defaultState, action) {
         case "GET_LIFESTAGES":
             return {...state, lifestage: action.payload}
         case "GET_USERLIFESTAGES":
-            return {...state, userLifestages: action.payload}
+            return { ...state, userLifestages:  action.payload}
         case "ADD_GROUP":
             return {...state, group: [...state.group, action.payload] }
         case "SET_COMMENTS":
@@ -26,9 +28,14 @@ function reducer(state = defaultState, action) {
         case "GET_CURRENTUSER":
             return {...state, currentUser: action.payload}
         case "JOIN_GROUP": 
-            return {...state, joinedGroups: [...state.joinedGroups, action.payload] }
+            return {...state, joinedGroups: action.payload }
         case "FIND_USER_GROUP":
             return { ...state, userGroups: action.payload }
+        case "SET_LIFESTAGE":
+            return { ...state, newlySetLifestage: action.payload }
+        case "GET_PROFILE_USERLIFESTAGES":
+            return { ...state, profileUserLifestages: action.payload }
+        
         default:
             return state
     }

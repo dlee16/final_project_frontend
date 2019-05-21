@@ -7,7 +7,10 @@ import {
     ADD_COMMENT,
     GET_CURRENTUSER,
     JOIN_GROUP,
-    FIND_USER_GROUP
+    FIND_USER_GROUP,
+    SET_LIFESTAGE,
+    GET_PROFILE_USERLIFESTAGES
+    
 } from './types'
 
 export function getGroups(groups) {
@@ -70,5 +73,19 @@ export function findUserGroup(group) {
     return {
         type: FIND_USER_GROUP,
         payload: group
+    }
+}
+
+export function setNewLifestage(lifestage) {
+    return {
+        type: SET_LIFESTAGE,
+        payload: lifestage
+    }
+}
+
+export function getProfileUserLifestages(lifestages){
+    return {
+        type: GET_PROFILE_USERLIFESTAGES,
+        payload: lifestages
     }
 }

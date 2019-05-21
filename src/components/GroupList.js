@@ -18,7 +18,7 @@ class GroupList extends React.Component {
     }
      
     renderGroups = () => {
-        const grp = this.props.group.filter(group => parseInt(this.props.userLifestages.lifestage_id) === parseInt(group.lifestage_id) || this.props.userLifestages.id === parseInt(group.lifestage_id))
+        const grp = this.props.group.filter(group => parseInt(this.props.userLifestages.lifestage_id) === parseInt(group.lifestage_id) || this.props.userLifestages.id === parseInt(group.lifestage_id) || this.props.newlySetLifestage.id === parseInt(group.lifestage_id))
     
         return grp.map( group => {
             return <Group key={group.id} group={group} currentUser={this.props.currentUser}/> 
@@ -35,15 +35,6 @@ class GroupList extends React.Component {
         this.setState({
             userLifestage: parseInt(e.target.value)
         })
-    }
-
-    renderSelectGroupOptions = () => {
-        if (this.props.group.length !==0){
-            const ulsg = this.props.group.filter(group => parseInt(this.props.userLifestages.lifestage_id) === parseInt(group.lifestage_id) || this.props.userLifestages.id === parseInt(group.lifestage_id))
-           return ulsg.map( group => {
-               return <option key={group.id} value={group.lifestage_id}>{group.lifestage_name}</option>
-           })
-       }
     }
 
     addGroupList = (id, name, description) => {
@@ -65,7 +56,7 @@ class GroupList extends React.Component {
 
     handleSubmit = (e) => {
         e.preventDefault()
-        this.addGroupList(this.state.userLifestage, this.state.groupName, this.state.groupDescription)
+        this.addGroupList(this.props.newlySetLifestage.id, this.state.groupName, this.state.groupDescription)
     }
 
     render(){
@@ -77,14 +68,10 @@ class GroupList extends React.Component {
                     <input type="text" placeholder="Group name" onChange={this.handleChange} name="groupName" value={this.state.groupName}/>
                     <input type="text" placeholder="Group description" onChange={this.handleChange} name="groupDescription" value={this.state.groupDesc}/>
 
-                    <select onChange={this.handleDropDownChange} name="userLifestage">
-                        <option selected="selected" value='selected' disabled>Select the lifestage...</option>
-                        {this.renderSelectGroupOptions()}
-                    </select>
-
                     <input type="submit" className="ui prof button" value="submit"/>
                 </form>
                 <br/>
+                <h2>{this.props.newlySetLifestage.name}</h2>
                 <div className="ui stackable center aligned grid container">
                     {this.renderGroups()}
                 </div>
@@ -96,8 +83,10 @@ class GroupList extends React.Component {
 const mapStateToProps = (state) => {
     return {
         group: state.group,
+        lifestage: state.lifestage,
         userLifestages: state.userLifestages,
-        userGroups: state.userGroups
+        userGroups: state.userGroups,
+        newlySetLifestage: state.newlySetLifestage
     }
 }
 
