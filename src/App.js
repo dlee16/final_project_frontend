@@ -11,7 +11,7 @@ import GroupContent from './components/GroupContent';
 import UserGroupList from './components/UserGroupList';
 import SignupForm from './components/SignupForm';
 import Profile from './components/Profile';
-import { getLifestages, getUserLifestages } from './actions';
+import { getLifestages, getUserLifestages, setComments, getGroups } from './actions';
 import { connect } from 'react-redux'; 
 
 class App extends React.Component {
@@ -35,19 +35,21 @@ class App extends React.Component {
         headers: {
           "Authorization": token
         }
-      }), fetch('http://localhost:3000/lifestages'), fetch('http://localhost:3000/memberships')])
-        .then(([res1, res2, res3]) => {
-          return Promise.all([res1.json(), res2.json(), res3.json()])
+      }), fetch('http://localhost:3000/comments'), fetch('http://localhost:3000/memberships'), fetch('http://localhost:3000/lifestages'), fetch('http://localhost:3000/groups')])
+        .then(([res1, res2, res3, res4, res5]) => {
+          return Promise.all([res1.json(), res2.json(), res3.json(), res4.json(), res5.json()])
         })
-        .then(([res1, res2, res3]) => {
+        .then(([res1, res2, res3, res4, res5]) => {
           if (res1.errors){
             alert(res1.errors)
           } else {
             this.setState({
               currentUser: res1
             })
-          this.props.getLifestages(res2)
+          this.props.setComments(res2)
           this.props.getUserLifestages(res3)
+          this.props.getLifestages(res4)
+          this.props.getGroups(res5)
           }
         })
       }
@@ -125,7 +127,8 @@ class App extends React.Component {
   const mapStateToProps = (state) => {
     return {
       lifestage: state.lifestage,
-      userLifestages: state.userLifestages
+      userLifestages: state.userLifestages,
+      comments: state.comments
     }
   }
 
@@ -136,6 +139,12 @@ class App extends React.Component {
       },
       getUserLifestages: (userLifestages) => {
         dispatch(getUserLifestages(userLifestages))
+      },
+      setComments: (userLifestages) => {
+        dispatch(setComments(userLifestages))
+      },
+      getGroups: (groups) => {
+        dispatch(getGroups(groups))
       }
     }
   }

@@ -39,7 +39,17 @@ class Group extends React.Component {
         }
     }
 
+    renderButtonText = () => {
+       if(this.props.value === "joined") {
+           return <button onClick={() => this.handleLeaveClick(this.props.group.id)} name={this.props.group.id}>Leave Group</button>
+       } else{
+           return <button onClick={this.handleClick} className="ui fluid submit button">Join</button>
+       } 
+    }
+
     render(){
+        console.log(this.props.profileUserGroups)
+        console.log(this.props.value)
         return (
                 <div className="two column row">
                     <div className="ui card" id="borderimg2">
@@ -49,8 +59,9 @@ class Group extends React.Component {
                                 <img src="../topic.jpg" height="100px" width="100px" alt="broken"/>
                                 <br/>
                                 <p>{this.props.group.description}</p>
-                                <button onClick={this.handleClick} className="ui fluid submit button">Join</button>
-                                <button onClick={() => this.handleLeaveClick(this.props.group.id)} name={this.props.group.id}>Leave Group</button>
+                                {/* <button onClick={this.handleClick} className="ui fluid submit button">Join</button>
+                                <button onClick={() => this.handleLeaveClick(this.props.group.id)} name={this.props.group.id}>Leave Group</button> */}
+                                {this.renderButtonText()}
                             </div>
                         </div>
                     </div>
@@ -61,9 +72,10 @@ class Group extends React.Component {
 
 const mapStateToProps = (state) => {
     return {
-        // userLifestages: state.userLifestages,
-        // joinedGroups: state.joinedGroups
-        state: state
+        userLifestages: state.userLifestages,
+        joinedGroups: state.joinedGroups,
+        profileUserGroups: state.profileUserGroups
+        // state: state
     }
 }
 

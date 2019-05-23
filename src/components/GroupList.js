@@ -11,18 +11,22 @@ class GroupList extends React.Component {
         userLifestage: ""
     }
 
-    componentDidMount() {
-        fetch(`http://localhost:3000/groups`)
-        .then(res => res.json())
-        .then(this.props.getGroups)
-    }
+    // componentDidMount() {
+    //     fetch(`http://localhost:3000/groups`)
+    //     .then(res => res.json())
+    //     .then(this.props.getGroups)
+    // }
      
     renderGroups = () => {
-        // const grp = this.props.group.filter(group => parseInt(this.props.userLifestages.lifestage_id) === parseInt(group.lifestage_id) || this.props.userLifestages.id === parseInt(group.lifestage_id) || this.props.newlySetLifestage.id === parseInt(group.lifestage_id))
+        if (this.props.group.length !== 0){
+            const grp = this.props.group.filter(group => this.props.newlySetLifestage.id === parseInt(group.lifestage_id))
 
-        return this.props.group.map( group => {
-            return <Group key={group.id} group={group} currentUser={this.props.currentUser}/> 
-        })
+            // debugger
+    
+            return grp.map( group => {
+                return <Group key={group.id} group={group} currentUser={this.props.currentUser}/> 
+            })
+        }
     }
 
     handleChange = (e) => {
@@ -85,7 +89,10 @@ const mapStateToProps = (state) => {
         group: state.group,
         lifestage: state.lifestage,
         userGroups: state.userGroups,
-        newlySetLifestage: state.newlySetLifestage
+        newlySetLifestage: state.newlySetLifestage,
+        userLifestages: state.userLifestages,
+        lifestageId: state.lifestageId,
+        profileUserGroups: state.profileUserGroups
     }
 }
 

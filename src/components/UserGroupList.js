@@ -13,6 +13,7 @@ class UserGroupList extends React.Component{
 
     renderGroups = () => {
         if (this.props.profileUserGroups.length !==0 ){
+            // debugger
             if (this.props.lifestageId.length === 0){
                 return this.props.profileUserGroups.map(group => {
                     return <Group key={group.id} group={group.group} currentUser={this.props.currentUser}/>
@@ -20,7 +21,7 @@ class UserGroupList extends React.Component{
             } else{
                 const filtered = this.props.profileUserGroups.filter(group => group.group.lifestage_id === this.props.lifestageId)
                 return filtered.map( group => {
-                    return <Group key={group.id} group={group.group} currentUser={this.props.currentUser} />
+                    return <Group key={group.id} group={group.group} currentUser={this.props.currentUser} value="joined" />
                 })
             }
         }

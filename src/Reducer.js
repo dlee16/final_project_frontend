@@ -2,6 +2,7 @@ const defaultState = {
     group: [],
     comments: [],
     lifestage: [],
+    userLifestages:[],
     currentUser: null,
     joinedGroups: [],
     userGroups:[],

@@ -12,17 +12,17 @@ class UpdateUser extends React.Component{
 
     render(){
         return(
-            <div>
+            <div className ="ui card">
                <form onSubmit ={this.handleSubmit}>
                    Name: <input type="text" onChange={this.handleChange} value={this.props.currentUser.name}/>
                    <br/>
                     Email: <input type="text" onChange={this.handleChange} value={this.props.currentUser.email}/>
                     <br/>
-                    FunFact: <input type="text" onChange={this.handleChange} value={this.props.currentUser.fun_fact}/>
+                    FunFact:<textarea onChange={this.handleChange} value={this.props.currentUser.fun_fact}></textarea>
                    <br/>
                     Username: <input type="text" onChange={this.handleChange} value={this.props.currentUser.username}/>
                    <br/>
-                    Password: <input type="password" onChange={this.handleChange} value={this.props.currentUser.password}/>
+                    Password: <input type="password" onChange={this.handleChange} value={this.props.currentUser.password ? this.props.currentUser.password : "" }  />
                </form>
             </div>
         )
