@@ -1,18 +1,24 @@
 import React from 'react';
-import { getLifestages, getUserLifestages } from '../actions';
+import { getLifestages, getUserLifestages, getAllUserLifestages } from '../actions';
 import { connect } from 'react-redux';
 
 class Lifestage extends React.Component {
 
     state ={
-        userLifestages: ""
+        userLifestages: []
     }
 
-    // componentDidMount = () => {
-    //     fetch('http://localhost:3000/lifestages')
-    //     .then(res => res.json())
-    //     .then(this.props.getLifestages)
-    // }
+    componentDidMount = () => {
+        fetch('http://localhost:3000/lifestages')
+        .then(res => res.json())
+        .then((response) => {
+            this.props.getLifestages(response)
+
+            const filteredLs = this.props.lifestage.filter(ls => ls.users.map(u => u.id).includes(this.props.currentUser.id))
+           
+            this.props.getAllUserLifestages(filteredLs)
+        })
+    }
 
 
     addUserLifestage = (id, user) => {
@@ -31,31 +37,35 @@ class Lifestage extends React.Component {
     }
 
 
-   handleSubmit = (e) => { 
-        e.preventDefault();
-        this.addUserLifestage(this.state.userLifestages[0], this.props.currentUser.id )
-       this.props.history.push(`/lifestages/${this.state.userLifestages[0]}/grouplist`)
-    }
+//    handleSubmit = (e) => { 
+//         e.preventDefault();
+//         this.addUserLifestage(this.state.userLifestages[0], this.props.currentUser.id )
+//        this.props.history.push(`/lifestages/${this.state.userLifestages[0]}/grouplist`)
+//     }
     
-    handleChange = (e) => {
-        if (e.target.checked){
-           this.setState({
-               userLifestages: [...this.state.userLifestages, parseInt(e.target.name)]
-           })
-        } else {
-            this.setState({
-                userLifestages: this.state.userLifestages.filter(uls => uls !== parseInt(e.target.name))
-            })
-        }
-    }
+    // handleChange = (e) => {
+    //     if (e.target.id){
+    //            this.setState({
+    //            userLifestages: [...this.state.userLifestages, parseInt(e.target.id)]
+    //        })
+    //     }else {
+    //         this.setState({
+    //             userLifestages: this.state.userLifestages.filter(uls => uls !== parseInt(e.target.id))
+    //         })
+    //     }
+    // }
 
+    handleClick =(e) => {
+        const id = parseInt(e.target.id)
+        this.addUserLifestage(id, this.props.currentUser.id)
+        this.props.history.push(`/lifestages/${id}/grouplist`)
+    }
     
     renderLifestage = () => {
         return this.props.lifestage.map(ls => {
             return (
-                <div key={ls.id} className="ui card ">
-                    <input type="radio" onChange={this.handleChange} name={ls.id} value={ls.name} />
-                    {ls.name}
+                <div key={ls.id}>
+                    <button onClick={this.handleClick} id ={ls.id}>{ls.name}</button>
                 </div>
             )
         })
@@ -64,13 +74,13 @@ class Lifestage extends React.Component {
     render(){
         return (
             <div className="ui stackable center aligned grid container">
-                <form onSubmit={this.handleSubmit}>
                     <h2>Lifestages:</h2>
                     {this.renderLifestage()}
+                {/* <form onSubmit={this.handleSubmit}>
                     
                     <button>Join!</button>
-                </form>
-               
+                </form> */}
+               <button> Back to Profile</button>
     
                 {/* <select name="" id="">
                     <option selected ="selected" defaultValue value='' disabled>Select your lifestage...</option>
@@ -91,7 +101,8 @@ class Lifestage extends React.Component {
 const mapStateToProps = (state) => {
     return {
         lifestage: state.lifestage,
-        userLifestages: state.userLifestages
+        userLifestages: state.userLifestages,
+        allUserLifestages: state.allUserLifestages
     }
 }
 
@@ -102,6 +113,9 @@ const mapDispatchToProps = (dispatch) => {
         },
         getUserLifestages: (userLifestages) => {
             dispatch(getUserLifestages(userLifestages))
+        },
+        getAllUserLifestages: (userLifestages) => {
+            dispatch(getAllUserLifestages(userLifestages))
         }
     }
 }

@@ -9,7 +9,14 @@ import {
     JOIN_GROUP,
     FIND_USER_GROUP,
     SET_LIFESTAGE,
-    GET_PROFILE_USERLIFESTAGES
+    GET_PROFILE_USERGROUPS,
+    GET_NEW_PROFILE_USERLIFESTAGES,
+    REMOVE_COMMENT,
+    UPDATED_COMMENTID,
+    REMOVE_USER_GROUPS,
+    GET_LIFESTAGE_ID,
+    GET_MEMBERSHIPS,
+    GET_ALL_USERLIFESTAGES
     
 } from './types'
 
@@ -83,9 +90,58 @@ export function setNewLifestage(lifestage) {
     }
 }
 
-export function getProfileUserLifestages(lifestages){
+export function getProfileUserGroups(groups){
     return {
-        type: GET_PROFILE_USERLIFESTAGES,
+        type: GET_PROFILE_USERGROUPS,
+        payload: groups
+    }
+}
+
+export function getNewProfileUserLifestages(lifestages){
+    return {
+        type: GET_NEW_PROFILE_USERLIFESTAGES,
         payload: lifestages
+    }
+}
+
+export function removeComment(comment){
+    return {
+        type: REMOVE_COMMENT,
+        payload: comment
+    }
+}
+
+export function updateCommentId(comment){
+    return {
+        type: UPDATED_COMMENTID,
+        payload: comment
+    }
+}
+
+export function removeUserGroups(group){
+    return {
+        type: REMOVE_USER_GROUPS,
+        payload: group
+    }
+}
+
+export function getLifestageId(lifestageId){
+    return {
+        type: GET_LIFESTAGE_ID,
+        payload: lifestageId
+    }
+}
+
+export function getMemberships(memberships){
+    return {
+        type: GET_MEMBERSHIPS,
+        payload: memberships
+    }
+}
+
+export function getAllUserLifestages(userLifestages){
+    return {
+        type: GET_ALL_USERLIFESTAGES,
+        payload: userLifestages
     }
 }

@@ -6,15 +6,19 @@ import CommentForm from './CommentForm'
 
 class GroupContent extends React.Component{
 
+    state ={
+        input: ""
+    }
+
     componentDidMount() {
         fetch(`http://localhost:3000/comments`)
         .then(res => res.json())
         .then(this.props.setComments)
     }
 
-    handleChange = (e) => {
+    handleCommentInput = (comment) => {
         this.setState({
-            input: e.target.value
+            input: comment
         })
     }
 
@@ -38,6 +42,29 @@ class GroupContent extends React.Component{
         this.addComment(this.props.currentUser.id, parseInt(this.props.match.params.id), input)
     }
 
+    editComment = (id, input) => {
+        const token = localStorage.getItem("token")
+        if (token) {
+            fetch(`http://localhost:3000/comments/${id}`, {
+                method: "PATCH",
+                headers: {
+                    "Authorization": token,
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify({
+                    id: id,
+                    user_comment: input
+                })
+            })
+                .then(res => res.json())
+                .then(response => this.props.setComments(response))
+        }
+    }
+
+    handleEditCommentClick = (input) => {
+        this.editComment(this.props.updatedCommentId, input)
+    }
+
     handleBackButton = () => {
         this.props.history.push(`/${this.props.currentUser.id}/profile`)
     }
@@ -48,20 +75,21 @@ class GroupContent extends React.Component{
                 return comment.group_id === parseInt(this.props.match.params.id)
             }) 
             if (group.length > 0){
-                return <CommentContainer key={group.id} group={group} />
+                return <CommentContainer key={group.id} handleCommentInput={this.handleCommentInput} group={group} currUser={this.props.currentUser}/>
             } else{
                 return "Be the first to comment!"
             }
         }
     }
         
-    render(){      
+    render(){  
         return (
             <div className="ui center aligned container">
                 <button>See all members of group</button>
                     {this.renderComments()}
-                    <CommentForm handleSubmit={this.handleSubmit} /> 
-                    <button onClick={this.handleBackButton} className="ui prof button">Back to Profile</button>
+                <CommentForm handleEditCommentClick={this.handleEditCommentClick} handleSubmit={this.handleSubmit} value={this.state.editComment} handleCommentInput={this.handleCommentInput} input={this.state.input}/> 
+                   
+                 <button onClick={this.handleBackButton} className="ui prof button">Back to Profile</button>
             </div>
         )
     }
@@ -71,7 +99,8 @@ const mapStateToProps = (state) => {
     return {
         // loggedIn: !!state.currentUser.id,
         group: state.group,
-        comments: state.comments
+        comments: state.comments,
+        updatedCommentId: state.updatedCommentId
     }
 }
 
