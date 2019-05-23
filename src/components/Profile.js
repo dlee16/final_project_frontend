@@ -3,7 +3,6 @@ import { NavLink } from 'react-router-dom';
 import { connect } from 'react-redux'; 
 import { getProfileUserGroups, findUserGroup, setNewLifestage, getLifestages, getNewProfileUserLifestages, getLifestageId, getMemberships } from '../actions';
 import UpdateUser from './UpdateUser';
-import GroupList from './GroupList'
 import UserGroupList from './UserGroupList'
 
 class Profile extends React.Component {
@@ -52,13 +51,6 @@ class Profile extends React.Component {
 
     handleUserGroupClick = (e) => {
         if (this.props.profileUserGroups.length > 0){
-            // const filteredLifestage = this.props.allMemberships.filter(ls => ls.user_id === this.props.currentUser.id)
-            
-            // this.props.getProfileUserLifestages(filteredLifestage)
-
-            // const findingLifestageThroughGroup = filteredLifestage.map(group => group.group)
-
-            // debugger 
             const userLifestages = this.props.profileUserGroups.filter(ls => ls.group.lifestage_name === e.target.name)
           
                 if (userLifestages.length === 0){
@@ -76,7 +68,6 @@ class Profile extends React.Component {
     }
 
     renderLifestage = () => {
-        // const currUserLifestage= this.props.lifestage.filter(ls => ls.users.map(user => (user.id)).includes(this.props.currentUser.id))
         if (this.props.newProfileUserLifestages.length !== 0){
             const currUserLifestage= this.props.newProfileUserLifestages.filter(ls => ls.user_id === parseInt(this.props.currentUser.id))
             return currUserLifestage.map(ls => {
@@ -98,8 +89,6 @@ class Profile extends React.Component {
 
 
     render(){
-        console.log(this.props.profileUserGroups)
-        console.log("ls id", this.props.lifestageId)
         if (this.props.currentUser){
             return (
                 <div className="ui center align container">

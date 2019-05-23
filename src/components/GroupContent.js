@@ -10,11 +10,11 @@ class GroupContent extends React.Component{
         input: ""
     }
 
-    componentDidMount() {
-        fetch(`http://localhost:3000/comments`)
-        .then(res => res.json())
-        .then(this.props.setComments)
-    }
+    // componentDidMount() {
+    //     fetch(`http://localhost:3000/comments`)
+    //     .then(res => res.json())
+    //     .then(this.props.setComments)
+    // }
 
     handleCommentInput = (comment) => {
         this.setState({

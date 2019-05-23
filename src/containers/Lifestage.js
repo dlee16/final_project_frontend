@@ -1,5 +1,5 @@
 import React from 'react';
-import { getLifestages, getUserLifestages, getAllUserLifestages } from '../actions';
+import { getLifestages, getUserLifestages, getAllUserLifestages, setNewLifestage } from '../actions';
 import { connect } from 'react-redux';
 
 class Lifestage extends React.Component {
@@ -56,22 +56,49 @@ class Lifestage extends React.Component {
     // }
 
     handleClick =(e) => {
-        const id = parseInt(e.target.id)
-        this.addUserLifestage(id, this.props.currentUser.id)
-        this.props.history.push(`/lifestages/${id}/grouplist`)
+            const id = parseInt(e.target.id)
+            this.addUserLifestage(id, this.props.currentUser.id)
+            
+            const currUserLifestage = this.props.lifestage.filter(ls => ls.users.map(user => (user.id)).includes(this.props.currentUser.id))
+    
+            if (e.target.value ==="joined"){
+                const lifestage = currUserLifestage.find(ls => ls.id === id)
+        
+                this.props.setNewLifestage(lifestage)
+              
+                this.props.history.push(`/lifestages/${id}/grouplist`)
+            } else {
+                const lifestage = this.props.lifestage.find(ls => ls.id === id)
+
+                this.props.setNewLifestage(lifestage)
+
+                this.props.history.push(`/lifestages/${id}/grouplist`)
+            }
+    
     }
     
     renderLifestage = () => {
         return this.props.lifestage.map(ls => {
-            return (
-                <div key={ls.id}>
-                    <button onClick={this.handleClick} id ={ls.id}>{ls.name}</button>
-                </div>
-            )
+            if (this.props.allUserLifestages.map(ls => ls.id).includes(ls.id)){
+                return (
+                    <div key={ls.id}>
+                        <h3>{ls.name}</h3>
+                        <button onClick={this.handleClick} id={ls.id} value="joined">Joined: See all groups</button>
+                    </div>
+                )
+            } else {
+               return( 
+                    <div key={ls.id}>
+                        <h3>{ls.name}</h3>
+                        <button onClick={this.handleClick} id ={ls.id} value="join">Join</button>
+                    </div> 
+                )
+            }
         })
     }
 
     render(){
+        console.log(this.props.lifestage)
         return (
             <div className="ui stackable center aligned grid container">
                     <h2>Lifestages:</h2>
@@ -102,7 +129,9 @@ const mapStateToProps = (state) => {
     return {
         lifestage: state.lifestage,
         userLifestages: state.userLifestages,
-        allUserLifestages: state.allUserLifestages
+        allUserLifestages: state.allUserLifestages,
+        newProfileUserLifestages: state.newProfileUserLifestages,
+        newlySetLifestage: state.newlySetLifestage
     }
 }
 
@@ -116,6 +145,9 @@ const mapDispatchToProps = (dispatch) => {
         },
         getAllUserLifestages: (userLifestages) => {
             dispatch(getAllUserLifestages(userLifestages))
+        },
+        setNewLifestage: (lifestage) => {
+            dispatch(setNewLifestage(lifestage))
         }
     }
 }
