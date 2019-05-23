@@ -18,9 +18,9 @@ class GroupList extends React.Component {
     }
      
     renderGroups = () => {
-        const grp = this.props.group.filter(group => parseInt(this.props.userLifestages.lifestage_id) === parseInt(group.lifestage_id) || this.props.userLifestages.id === parseInt(group.lifestage_id) || this.props.newlySetLifestage.id === parseInt(group.lifestage_id))
-    
-        return grp.map( group => {
+        // const grp = this.props.group.filter(group => parseInt(this.props.userLifestages.lifestage_id) === parseInt(group.lifestage_id) || this.props.userLifestages.id === parseInt(group.lifestage_id) || this.props.newlySetLifestage.id === parseInt(group.lifestage_id))
+
+        return this.props.group.map( group => {
             return <Group key={group.id} group={group} currentUser={this.props.currentUser}/> 
         })
     }
@@ -84,7 +84,6 @@ const mapStateToProps = (state) => {
     return {
         group: state.group,
         lifestage: state.lifestage,
-        userLifestages: state.userLifestages,
         userGroups: state.userGroups,
         newlySetLifestage: state.newlySetLifestage
     }

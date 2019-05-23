@@ -2,18 +2,21 @@ const defaultState = {
     group: [],
     comments: [],
     lifestage: [],
-    userLifestages:[],
     currentUser: null,
     joinedGroups: [],
     userGroups:[],
     newlySetLifestage:[],
-    profileUserLifestages: []
+    profileUserGroups: [],
+    newProfileUserLifestages: [],
+    updatedCommentId: [],
+    lifestageId: [],
+    allMemberships: [],
+    allUserLifestages: []
 }
 
 function reducer(state = defaultState, action) {
     switch(action.type){
         case "GET_GROUPS":
-        // console.log({...state, group: action.payload})
             return {...state, group: action.payload}
         case "GET_LIFESTAGES":
             return {...state, lifestage: action.payload}
@@ -33,9 +36,24 @@ function reducer(state = defaultState, action) {
             return { ...state, userGroups: action.payload }
         case "SET_LIFESTAGE":
             return { ...state, newlySetLifestage: action.payload }
-        case "GET_PROFILE_USERLIFESTAGES":
-            return { ...state, profileUserLifestages: action.payload }
-        
+        case "GET_PROFILE_USERGROUPS":
+            return { ...state, profileUserGroups: action.payload}
+        case "GET_NEW_PROFILE_USERLIFESTAGES":
+            return { ...state, newProfileUserLifestages: action.payload }
+        case "REMOVE_COMMENT":
+            return { ...state, comments: action.payload }
+        case "UPDATED_COMMENTID":
+            return { ...state, updatedCommentId: action.payload }
+        case "REMOVE_USER_GROUPS":
+            // return { ...state, userGroups: state.userGroups.filter( ug=> ug.id !== parseInt(action.payload)) }
+            console.log(action.payload)
+            return { ...state, profileUserGroups: action.payload}
+        case "GET_LIFESTAGE_ID":
+            return { ...state, lifestageId: action.payload}
+        case "GET_MEMBERSHIPS":
+            return { ...state, allMemberships: action.payload}
+        case "GET_ALL_USERLIFESTAGES":
+            return { ...state, allUserLifestages: action.payload}
         default:
             return state
     }
