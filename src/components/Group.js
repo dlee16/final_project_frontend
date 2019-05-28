@@ -1,7 +1,8 @@
 import React from 'react'; 
 import { withRouter} from 'react-router-dom';
-import { connect } from 'react-redux'
+import { connect } from 'react-redux';
 import { joinGroup, removeUserGroups } from '../actions';
+import withAuth from './WithAuth';
 
 class Group extends React.Component {
 
@@ -40,23 +41,28 @@ class Group extends React.Component {
     }
 
     renderButtonText = () => {
-       if(this.props.value === "joined") {
-           return <button onClick={() => this.handleLeaveClick(this.props.group.id)} name={this.props.group.id}>Leave Group</button>
+        if (this.props.currentUser && this.props.group.users.find(u => u.id === this.props.currentUser.id)) {
+            return (
+                <div>
+                    <button onClick={this.handleClick} className="ui fluid  submit button">See all comments</button>
+                    
+                    <div className="ui horizontal divider">Or</div>
+                    <button onClick={() => this.handleLeaveClick(this.props.group.id)} name={this.props.group.id} className="ui fluid submit button">Leave Group?</button>
+                </div>
+            )
        } else{
            return <button onClick={this.handleClick} className="ui fluid submit button">Join</button>
-       } 
+        }
     }
 
-    render(){
-        console.log(this.props.profileUserGroups)
-        console.log(this.props.value)
+    render(){ 
         return (
                 <div className="two column row">
                     <div className="ui card" id="borderimg2">
                         <div className="seven wide column">
                             <div className="content">
                                 <h2>{this.props.group.name}</h2> <br/>
-                                <img src="../topic.jpg" height="100px" width="100px" alt="broken"/>
+                                    <img src={require('./question.png')} height="150px" width="150px" alt="broken" />
                                 <br/>
                                 <p>{this.props.group.description}</p>
                                 {/* <button onClick={this.handleClick} className="ui fluid submit button">Join</button>
@@ -74,8 +80,9 @@ const mapStateToProps = (state) => {
     return {
         userLifestages: state.userLifestages,
         joinedGroups: state.joinedGroups,
-        profileUserGroups: state.profileUserGroups
-        // state: state
+        profileUserGroups: state.profileUserGroups,
+        currentUser: state.currentUser,
+        hi: state.group
     }
 }
 
@@ -90,5 +97,5 @@ const mapDispatchToProps = (dispatch) => {
     }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(withRouter(Group))
+export default connect(mapStateToProps, mapDispatchToProps)(withRouter(withAuth(Group)))
 

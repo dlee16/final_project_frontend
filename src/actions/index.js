@@ -16,7 +16,9 @@ import {
     REMOVE_USER_GROUPS,
     GET_LIFESTAGE_ID,
     GET_MEMBERSHIPS,
-    GET_ALL_USERLIFESTAGES
+    GET_ALL_USERLIFESTAGES,
+    SET_CURRENTUSER,
+    UPDATE_CURRENTUSER
     
 } from './types'
 
@@ -24,6 +26,13 @@ export function getGroups(groups) {
     return {
         type: GET_GROUPS,
         payload: groups
+    }
+}
+
+export function setCurrentUser(user) {
+    return {
+        type: SET_CURRENTUSER,
+        payload: user
     }
 }
 
@@ -143,5 +152,12 @@ export function getAllUserLifestages(userLifestages){
     return {
         type: GET_ALL_USERLIFESTAGES,
         payload: userLifestages
+    }
+}
+
+export function updateCurrentUser(user){
+    return {
+        type: UPDATE_CURRENTUSER,
+        payload: user
     }
 }

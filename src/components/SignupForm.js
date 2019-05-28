@@ -5,7 +5,7 @@ class SignupForm extends React.Component {
         name: "",
         username: "",
         password: "",
-        funFact: "", 
+        fun_fact: "", 
         email: ""
     }
 
@@ -47,7 +47,7 @@ class SignupForm extends React.Component {
                             <div className="field">
                                 <div className="ui left icon input">
                                     <i className="thumbs up icon"></i>
-                                         <input type="text" onChange={this.handleChange} value={this.state.funFact} name="funFact" placeholder="Fun Fact"/>
+                                         <input type="text" onChange={this.handleChange} value={this.state.funFact} name="fun_fact" placeholder="Fun Fact"/>
                                 </div>
                             </div>
                             <div className="field">

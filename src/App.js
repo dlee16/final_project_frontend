@@ -11,21 +11,15 @@ import GroupContent from './components/GroupContent';
 import UserGroupList from './components/UserGroupList';
 import SignupForm from './components/SignupForm';
 import Profile from './components/Profile';
-import { getLifestages, getUserLifestages, setComments, getGroups } from './actions';
+import { getLifestages, getUserLifestages, setComments, getGroups, setCurrentUser } from './actions';
 import { connect } from 'react-redux'; 
+import Home from './components/Home';
 
 class App extends React.Component {
-  state = {
-    currentUser: null
-  }
-
   logOut = () => {
     localStorage.removeItem("token")
-    this.setState({
-      currentUser: null
-    }, () => {
-      this.props.history.push("/login")
-    })
+    this.props.setCurrentUser(null)
+    this.props.history.push("/")
   }
 
   componentDidMount(){
@@ -43,15 +37,14 @@ class App extends React.Component {
           if (res1.errors){
             alert(res1.errors)
           } else {
-            this.setState({
-              currentUser: res1
-            })
+            this.props.setCurrentUser(res1)
+            }
           this.props.setComments(res2)
           this.props.getUserLifestages(res3)
           this.props.getLifestages(res4)
           this.props.getGroups(res5)
           }
-        })
+        )
       }
   }
 
@@ -76,21 +69,24 @@ class App extends React.Component {
 
 
   setCurrentUser = (response) => {
-    this.setState({
-      currentUser: response.user
-    }, () => {
-      localStorage.setItem("token", response.token)
-        this.props.history.push(`/${this.state.currentUser.id}/profile`)
-    })
+    console.log("bye")
+    this.props.setCurrentUser(response.user)
+    localStorage.setItem("token", response.token)
+    // debugger
+    this.props.history.push(`/${this.props.currentUser.id}/profile`)
+    // this.props.history.push(`/${this.state.currentUser.id}/profile`)
+    // this.setState({
+    //   currentUser: response.user
+    // }, () => {
+    //   localStorage.setItem("token", response.token)
+    //     this.props.history.push(`/${this.state.currentUser.id}/profile`)
+    // })
   }
 
   setUserForNewUser = (response) => {
-    this.setState({
-      currentUser: response.user
-    }, () => {
+      this.props.setCurrentUser(response.user)
       localStorage.setItem("token", response.token)
-        this.props.history.push(`/lifestages`)
-    })
+      this.props.history.push(`/lifestages`)
   }
 
 
@@ -98,25 +94,29 @@ class App extends React.Component {
     return (
       <div className="App">
         <Header />
-        <Nav currentUser ={this.state.currentUser} logOut={this.logOut}/> 
+        <Nav logOut={this.logOut}/> 
+        {/* <Nav currentUser ={this.state.currentUser} logOut={this.logOut}/>  */}
         <Switch>
-          <Route path="/login" render={(routeProps)=> < Login {...routeProps} setCurrentUser={this.setCurrentUser} /> }/>  
+          <Route path={this.props.currentUser ? `/${this.props.currentUser.id}/profile` : '/login'} component= {Profile}/>  
 
-          <Route path={this.state.currentUser ? `/${this.state.currentUser.id}/profile` : '/login'} render={(routeProps) => <Profile {...routeProps} currentUser={this.state.currentUser}/> }/>  
+          <Route path= '/lifestages/:lifestage_id/grouplist' component= {GroupList}/>  
 
-          <Route path={this.state.currentUser ? '/lifestages/:lifestage_id/grouplist' : '/login'} render={(routeProps) => <GroupList {...routeProps} currentUser={this.state.currentUser} />}/>  
+          <Route path= '/lifestages/:lifestage_id/usergrouplist' component= {UserGroupList}/>  
 
-          <Route path={this.state.currentUser ? '/lifestages/:lifestage_id/usergrouplist' : '/login'} render={(routeProps) => <UserGroupList {...routeProps} currentUser={this.state.currentUser} />}/>  
+          <Route path= '/lifestages' component= {Lifestage } /> 
 
-          <Route path={this.state.currentUser ? '/lifestages' : '/login'} render={(routeProps) => <Lifestage {...routeProps} currentUser={this.state.currentUser} />} /> 
+          <Route path= '/group/:id' component= {GroupContent } /> 
 
-          <Route path={this.state.currentUser ? '/group/:id' : '/login'} render={(routeProps) => <GroupContent {...routeProps} currentUser={this.state.currentUser} />} /> 
+          <Route path= '/group/:id' component= {Group } /> 
 
-          <Route path={this.state.currentUser ? '/group/:id' : '/login'} render={(routeProps) => <Group {...routeProps} currentUser={this.state.currentUser} />} /> 
+          <Route path="/userlogin" render={(routeProps) => < Login {...routeProps} setCurrentUser={this.setCurrentUser} />} /> 
+
+          {/* <Route path="/userlogin" component ={Login} />  */}
 
           <Route path="/signup" render={(routeProps) => (< SignupForm {...routeProps} createUser={this.createUser} />)} /> 
 
-          <Route path="/" render={(routeProps) => < Login {...routeProps} setCurrentUser={this.setCurrentUser} />}/> 
+          <Route path="/" component = {Home} /> 
+
         </Switch>
  
       </div>
@@ -128,7 +128,8 @@ class App extends React.Component {
     return {
       lifestage: state.lifestage,
       userLifestages: state.userLifestages,
-      comments: state.comments
+      comments: state.comments,
+      currentUser: state.currentUser
     }
   }
 
@@ -145,6 +146,9 @@ class App extends React.Component {
       },
       getGroups: (groups) => {
         dispatch(getGroups(groups))
+      },
+      setCurrentUser: (user) => {
+        dispatch(setCurrentUser(user))
       }
     }
   }

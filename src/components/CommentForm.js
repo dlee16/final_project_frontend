@@ -1,4 +1,6 @@
-import React from 'react'
+import React from 'react';
+import withAuth from './WithAuth';
+import { connect } from 'react-redux';
 
 class CommentForm extends React.Component {
     state ={
@@ -22,19 +24,27 @@ class CommentForm extends React.Component {
 
     render(){
         return(
-            <div className="ui stackable center aligned grid container">
-                <div className="seven wide column">
+            <div id="div5">
+                <div id="div6">
                     <form className="ui reply form" onSubmit={this.handleSubmit}>
                         <textarea onChange={this.handleChange} value={this.props.input}></textarea>
                         <button className="ui prof icon button">
                             <i className="icon edit"></i>Leave a comment!</button>
                     </form>
+                </div>
+                    <div class="ui horizontal divider">Or</div>
                         <button onClick={this.handleEditClick} className="ui prof icon button">
                             <i className="icon edit"></i>Edit your comment!</button>
-                </div>
+               
             </div>
         )
     }
 }
 
-export default CommentForm
+const mapStateToProps = (state) => {
+    return {
+        currentUser: state.currentUser
+    }
+}
+
+export default connect(mapStateToProps)(withAuth(CommentForm))

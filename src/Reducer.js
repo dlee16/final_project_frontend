@@ -12,7 +12,8 @@ const defaultState = {
     updatedCommentId: [],
     lifestageId: [],
     allMemberships: [],
-    allUserLifestages: []
+    allUserLifestages: [],
+    
 }
 
 function reducer(state = defaultState, action) {
@@ -29,8 +30,6 @@ function reducer(state = defaultState, action) {
             return {...state, comments: action.payload}
         case "ADD_COMMENT":
             return {...state, comments: [...state.comments, action.payload]}
-        case "GET_CURRENTUSER":
-            return {...state, currentUser: action.payload}
         case "JOIN_GROUP": 
             return {...state, joinedGroups: action.payload }
         case "FIND_USER_GROUP":
@@ -47,7 +46,7 @@ function reducer(state = defaultState, action) {
             return { ...state, updatedCommentId: action.payload }
         case "REMOVE_USER_GROUPS":
             // return { ...state, userGroups: state.userGroups.filter( ug=> ug.id !== parseInt(action.payload)) }
-            console.log(action.payload)
+            
             return { ...state, profileUserGroups: action.payload}
         case "GET_LIFESTAGE_ID":
             return { ...state, lifestageId: action.payload}
@@ -55,6 +54,10 @@ function reducer(state = defaultState, action) {
             return { ...state, allMemberships: action.payload}
         case "GET_ALL_USERLIFESTAGES":
             return { ...state, allUserLifestages: action.payload}
+        case "SET_CURRENTUSER":
+            return { ...state, currentUser: action.payload}
+        case "UPDATE_CURRENTUSER":
+            return { ...state, currentUser: action.payload}
         default:
             return state
     }
