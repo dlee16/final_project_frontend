@@ -1,10 +1,12 @@
 import React from 'react';
-import Comment from '../components/Comment'
+import Comment from '../components/Comment';
+import { connect } from 'react-redux';
+import withAuth from '../components/WithAuth';
 
 const CommentContainer = (props) => {
     const renderComments = () => {
         return props.group.map(comment => {
-            return <Comment key={comment.id} commentId={comment.id} userId={comment.user_id} username={comment.user_name} comment={comment.user_comment} currUser={props.currUser} handleCommentInput={props.handleCommentInput} />
+            return <Comment key={comment.id} commentId={comment.id} userId={comment.user_id} username={comment.user_name} userComment={comment.user_comment} handleCommentInput={props.handleCommentInput} />
         })
     }
 
@@ -16,4 +18,10 @@ const CommentContainer = (props) => {
     )
 }
 
-export default CommentContainer
+const mapStateToProps = (state) => {
+    return{
+        currentUser: state.currentUser
+    }
+}
+
+export default connect(mapStateToProps)(withAuth(CommentContainer))

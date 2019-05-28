@@ -1,5 +1,6 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
+import { connect } from 'react-redux';
 
 const Nav = (props) => {
     return (
@@ -8,22 +9,29 @@ const Nav = (props) => {
             <div className="ui container">
                 <div className="right menu">
                     <NavLink to={`/${props.currentUser.id}/profile`} className="right item"> My Profile </NavLink>
-                    <NavLink onClick={props.logOut} to='/login' className="right item"> Log Out</NavLink>
+                    <NavLink to='/' onClick={props.logOut} className="right item"> Log Out</NavLink>
+                    <NavLink to='/' className="right item"> Home</NavLink>
                 </div>
             </div>
         </div>
             : 
         <div className="ui pointing menu">
-                <div className="right menu">
-                        <NavLink className="active item" to ='/signup'> SignUp</NavLink>
-                    <NavLink className=" item" to ='/login'> Login</NavLink>
-                </div>
-        
+            <div className="right menu">
+                <NavLink className="active item" to ='/signup'> SignUp</NavLink>
+                <NavLink className=" item" to='/userlogin'> Login</NavLink>
+                <NavLink to='/' className="right item"> Home</NavLink>
+            </div>
         </div>
     )
 }
 
-export default Nav
+const mapStateToProps = (state) => {
+    return {
+        currentUser: state.currentUser
+    }
+}
+
+export default connect(mapStateToProps)(Nav)
 
 
    

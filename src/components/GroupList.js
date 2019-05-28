@@ -2,6 +2,7 @@ import React from 'react';
 import Group from './Group';
 import { connect } from 'react-redux';
 import { getGroups, addGroup } from '../actions';
+import withAuth from './WithAuth';
 
 class GroupList extends React.Component {
 
@@ -11,22 +12,22 @@ class GroupList extends React.Component {
         userLifestage: ""
     }
 
-    // componentDidMount() {
-    //     fetch(`http://localhost:3000/groups`)
-    //     .then(res => res.json())
-    //     .then(this.props.getGroups)
-    // }
+    componentDidMount() {
+        fetch(`http://localhost:3000/groups`)
+        .then(res => res.json())
+        .then(this.props.getGroups)
+    }
      
     renderGroups = () => {
-        if (this.props.group.length !== 0){
-            const grp = this.props.group.filter(group => this.props.newlySetLifestage.id === parseInt(group.lifestage_id))
-
-            // debugger
+        const lifestageId = this.props.match.params.lifestage_id
+        // if (this.props.group.length !== 0){
+            // const grp = this.props.group.filter(group => this.props.newlySetLifestage.id === parseInt(group.lifestage_id))
+            // if (this.props.group.length !==0){
+                const grp = this.props.group.filter(group => group.lifestage_id === parseInt(lifestageId))
     
-            return grp.map( group => {
-                return <Group key={group.id} group={group} currentUser={this.props.currentUser}/> 
-            })
-        }
+                return grp.map( group => {
+                        return <Group key={group.id} group={group}/> 
+                    })
     }
 
     handleChange = (e) => {
@@ -60,10 +61,12 @@ class GroupList extends React.Component {
 
     handleSubmit = (e) => {
         e.preventDefault()
-        this.addGroupList(this.props.newlySetLifestage.id, this.state.groupName, this.state.groupDescription)
+        const lifestageId = this.props.match.params.lifestage_id
+        this.addGroupList(lifestageId, this.state.groupName, this.state.groupDescription)
     }
 
     render(){
+        console.log("LOOK HERE", this.props)
         return (
             <div>
                 <label >Don't see what you're looking for? Start a new group!</label>
@@ -85,6 +88,8 @@ class GroupList extends React.Component {
 }
 
 const mapStateToProps = (state) => {
+    console.log("MSTP in GL", state);
+    
     return {
         group: state.group,
         lifestage: state.lifestage,
@@ -92,7 +97,7 @@ const mapStateToProps = (state) => {
         newlySetLifestage: state.newlySetLifestage,
         userLifestages: state.userLifestages,
         lifestageId: state.lifestageId,
-        profileUserGroups: state.profileUserGroups
+        currentUser: state.currentUser
     }
 }
 
@@ -107,4 +112,4 @@ const mapDispatchToProps = (dispatch) => {
     }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(GroupList)
+export default connect(mapStateToProps, mapDispatchToProps)(withAuth(GroupList))
