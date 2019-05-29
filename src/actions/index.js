@@ -18,7 +18,9 @@ import {
     GET_MEMBERSHIPS,
     GET_ALL_USERLIFESTAGES,
     SET_CURRENTUSER,
-    UPDATE_CURRENTUSER
+    UPDATE_CURRENTUSER,
+    JOIN_LIFESTAGE,
+    LEAVE_GROUP
     
 } from './types'
 
@@ -158,6 +160,18 @@ export function getAllUserLifestages(userLifestages){
 export function updateCurrentUser(user){
     return {
         type: UPDATE_CURRENTUSER,
+        payload: user
+    }
+}
+export function joinLifestage(lifestage){
+    return {
+        type: JOIN_LIFESTAGE,
+        payload: lifestage
+    }
+}
+export function leaveGroup(user){
+    return {
+        type: LEAVE_GROUP,
         payload: user
     }
 }

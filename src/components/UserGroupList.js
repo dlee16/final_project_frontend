@@ -3,6 +3,8 @@ import { connect } from 'react-redux';
 import { getMemberships, getProfileUserGroups } from '../actions';
 import Group from './Group';
 import withAuth from './WithAuth';
+import Header from './Header';
+import Nav from './Nav';
 
 class UserGroupList extends React.Component{
 
@@ -52,11 +54,18 @@ class UserGroupList extends React.Component{
         console.log("prof ls", this.props.profileUserGroups)
         console.log("lsid", this.props.lifestageId)
         return(
-            <div className="ui stackable center aligned container">
+            <div >
+                <Header />
+                <Nav /> 
                 <h2>Usergroups</h2>
                 <div className="ui hidden divider"></div>
-                {this.renderGroups()}
-            </div>
+                <div>
+                    <div id="usergroup">
+                        {this.renderGroups()}
+                    </div>
+                </div>
+                </div>
+          
         )
     }
 }

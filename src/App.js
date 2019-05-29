@@ -1,12 +1,11 @@
 import React from 'react';
 import './App.css';
-import Header from './components/Header';
-import Nav from './components/Nav';
 import Login from './components/Login';
 import Lifestage from './containers/Lifestage';
 import { Route, Switch, withRouter } from 'react-router-dom';
 import GroupList from './components/GroupList';
 import Group from './components/Group';
+import About from './components/About';
 import GroupContent from './components/GroupContent';
 import UserGroupList from './components/UserGroupList';
 import SignupForm from './components/SignupForm';
@@ -16,11 +15,12 @@ import { connect } from 'react-redux';
 import Home from './components/Home';
 
 class App extends React.Component {
-  logOut = () => {
-    localStorage.removeItem("token")
-    this.props.setCurrentUser(null)
-    this.props.history.push("/")
-  }
+
+  // logOut = () => {
+  //   localStorage.removeItem("token")
+  //   this.props.setCurrentUser(null)
+  //   this.props.history.push("/")
+  // }
 
   componentDidMount(){
     const token = localStorage.getItem("token")
@@ -93,8 +93,8 @@ class App extends React.Component {
   render() {
     return (
       <div className="App">
-        <Header />
-        <Nav logOut={this.logOut}/> 
+        {/* <Header /> */}
+        {/* <Nav logOut={this.logOut}/>  */}
         {/* <Nav currentUser ={this.state.currentUser} logOut={this.logOut}/>  */}
         <Switch>
           <Route path={this.props.currentUser ? `/${this.props.currentUser.id}/profile` : '/login'} component= {Profile}/>  
@@ -111,15 +111,18 @@ class App extends React.Component {
 
           <Route path="/userlogin" render={(routeProps) => < Login {...routeProps} setCurrentUser={this.setCurrentUser} />} /> 
 
-          {/* <Route path="/userlogin" component ={Login} />  */}
+          <Route path="/userlogin" component ={Login} /> 
 
           <Route path="/signup" render={(routeProps) => (< SignupForm {...routeProps} createUser={this.createUser} />)} /> 
 
-          <Route path="/" component = {Home} /> 
+          <Route exact path="/About" component = {About} />
+
+          <Route exact path="/" component = {Home} /> 
 
         </Switch>
  
       </div>
+
     ); 
   }
 }

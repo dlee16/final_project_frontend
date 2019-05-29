@@ -48,6 +48,7 @@ class Login extends React.Component{
     render(){
         console.log(this.props)
         return (
+            <div className="login">
         <div className="ui middle aligned center aligned grid">
             <div className="column">
                 <h2 className="ui login image header">
@@ -82,6 +83,7 @@ class Login extends React.Component{
                         <button onClick={this.handleSignUpClick} >Sign Up </button>
                     </div>
             </div>
+        </div>
         </div>
         )
     }

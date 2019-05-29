@@ -13,7 +13,7 @@ const defaultState = {
     lifestageId: [],
     allMemberships: [],
     allUserLifestages: [],
-    
+
 }
 
 function reducer(state = defaultState, action) {
@@ -29,6 +29,12 @@ function reducer(state = defaultState, action) {
         case "SET_COMMENTS":
             return {...state, comments: action.payload}
         case "ADD_COMMENT":
+        const editedComment = state.comments.find(comment => comment.id === action.payload.id)
+        if (editedComment){
+            return (
+                {...state, comments: state.comments.map(comment => comment === editedComment ? action.payload : comment)}
+            )
+        }
             return {...state, comments: [...state.comments, action.payload]}
         case "JOIN_GROUP": 
             return {...state, joinedGroups: action.payload }
@@ -46,8 +52,10 @@ function reducer(state = defaultState, action) {
             return { ...state, updatedCommentId: action.payload }
         case "REMOVE_USER_GROUPS":
             // return { ...state, userGroups: state.userGroups.filter( ug=> ug.id !== parseInt(action.payload)) }
-            
-            return { ...state, profileUserGroups: action.payload}
+           const alteredGroups = state.group.find(g => g.id === action.payload.deletedId)
+            return { ...state, profileUserGroups: action.payload.groups, group: state.group.map(grp => grp === alteredGroups ? { ...grp, users: grp.users.filter(u => u.id !== state.currentUser.id)} : grp
+            )
+        } 
         case "GET_LIFESTAGE_ID":
             return { ...state, lifestageId: action.payload}
         case "GET_MEMBERSHIPS":
@@ -58,6 +66,10 @@ function reducer(state = defaultState, action) {
             return { ...state, currentUser: action.payload}
         case "UPDATE_CURRENTUSER":
             return { ...state, currentUser: action.payload}
+        case "JOIN_LIFESTAGE":
+            return { ...state, currentUser: {...state.currentUser,lifestages: [...state.currentUser.lifestages, action.payload]}}
+        case "LEAVE_GROUP":
+            return { ...state, group: {...state.group,users: [...state.group.users, action.payload]}}
         default:
             return state
     }

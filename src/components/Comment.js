@@ -2,7 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { removeComment, updateCommentId  } from '../actions';
 import withAuth from './WithAuth';
-import { Grid, Image } from 'semantic-ui-react'
+import { Grid, Image } from 'semantic-ui-react';
 
 class Comment extends React.Component {
 
@@ -28,7 +28,7 @@ class Comment extends React.Component {
 
     renderDeleteButton = () => {
         if (this.props.currentUser && this.props.currentUser.id === parseInt(this.props.userId)){
-            return <button onClick={() => this.handleDeleteClick(this.props.commentId)}>Delete</button>
+            return <button onClick={() => this.handleDeleteClick(this.props.commentId)} className="ui mini submit button">Delete</button>
         } else{
             return null
         }
@@ -36,7 +36,7 @@ class Comment extends React.Component {
 
     renderEditButton = () => {
         if (this.props.currentUser && this.props.currentUser.id === parseInt(this.props.userId)) {
-            return <button name={this.props.userComment} onClick={this.handleEditClick}>Edit</button>
+            return <button className="ui mini submit button" name={this.props.userComment} onClick={this.handleEditClick}>Edit</button>
         } else {
             return null
         }
@@ -45,34 +45,37 @@ class Comment extends React.Component {
     render(){
    
         return(
-
-             <div >
-                    <div id="comment" > 
-                        <Grid columns={2}>
+            <div >
+                <div id="comment" > 
+                    <Grid columns={2}>
                         <div id="div9">
-                            <Grid.Column >
+                             <Grid.Column >
                                 <Image src='../profile.jpg' width="100px" height="100px" circular/>
                             </Grid.Column>
-
                         </div>
-                                <div id="div8">
-                            <Grid.Column >
-                            <div className="speech-bubble-ds">
-                                <h4>{this.props.username}</h4>
-                                <div>
-                                    {this.props.userComment}
-                                </div>
-                                <div>
-                                    {this.renderEditButton()}
-                                    {this.renderDeleteButton()}
-                                </div>
-                                <div class="speech-bubble-ds-arrow"></div>
-                            </div>
+                        <Grid.Column >
+                            
 
-                            </Grid.Column>
+                            <div id="commentBubble">
+                                <div className="speech-bubble-ds">
+                                    <h4>{this.props.username}</h4>
+                                    <div className="test">
+                                        {/* <Segment style={{ overflow: 'auto', maxHeight: 60 }} id="segment1"> */}
+                                            {this.props.userComment}
+                                        {/* </Segment> */}
+                                    </div>
+                                    <div>
+                                        {this.renderEditButton()}
+                                        {this.renderDeleteButton()}
+                                    </div>
+                                    <div className="speech-bubble-ds-arrow"></div>
                                 </div>
-                        </Grid>
-                    </div>
+                            </div>
+                          
+                        </Grid.Column>
+                    </Grid>
+                  
+                </div>
             </div> 
                
         )

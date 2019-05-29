@@ -3,6 +3,8 @@ import Group from './Group';
 import { connect } from 'react-redux';
 import { getGroups, addGroup } from '../actions';
 import withAuth from './WithAuth';
+import Header from './Header';
+import Nav from './Nav';
 
 class GroupList extends React.Component {
 
@@ -25,20 +27,16 @@ class GroupList extends React.Component {
             // if (this.props.group.length !==0){
                 const grp = this.props.group.filter(group => group.lifestage_id === parseInt(lifestageId))
     
-                return grp.map( group => {
-                        return <Group key={group.id} group={group}/> 
-                    })
+        return grp.map( group => {
+            console.log("grou",group)
+            console.log("users", group.users)
+            return <Group key={group.id} group={group} users={group.users}/> 
+        })
     }
 
     handleChange = (e) => {
         this.setState({
             [e.target.name]: e.target.value
-        })
-    }
-
-    handleDropDownChange = (e) => {
-        this.setState({
-            userLifestage: parseInt(e.target.value)
         })
     }
 
@@ -63,12 +61,17 @@ class GroupList extends React.Component {
         e.preventDefault()
         const lifestageId = this.props.match.params.lifestage_id
         this.addGroupList(lifestageId, this.state.groupName, this.state.groupDescription)
+        this.setState({
+            groupName: "",
+            groupDescription: ""
+        })
     }
 
     render(){
-        console.log("LOOK HERE", this.props)
         return (
             <div>
+                <Header />
+                <Nav />
                 <label >Don't see what you're looking for? Start a new group!</label>
                 
                 <form onSubmit={this.handleSubmit} action="">
@@ -79,7 +82,7 @@ class GroupList extends React.Component {
                 </form>
                 <br/>
                 <h2>{this.props.newlySetLifestage.name}</h2>
-                <div className="ui stackable center aligned grid container">
+                <div className="ui stackable grid container">
                     {this.renderGroups()}
                 </div>
             </div>
@@ -88,7 +91,6 @@ class GroupList extends React.Component {
 }
 
 const mapStateToProps = (state) => {
-    console.log("MSTP in GL", state);
     
     return {
         group: state.group,

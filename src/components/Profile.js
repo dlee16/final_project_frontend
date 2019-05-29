@@ -1,11 +1,12 @@
 import React from 'react';
-import { NavLink } from 'react-router-dom';
 import { connect } from 'react-redux'; 
 import { getProfileUserGroups, findUserGroup, setNewLifestage, getLifestages, getNewProfileUserLifestages, getLifestageId, getMemberships } from '../actions';
 import UpdateUser from './UpdateUser';
 import withAuth from './WithAuth';
 import { Card, Container, Grid, Image, Button, Icon, Divider, Modal} from 'semantic-ui-react';
 import v4 from "uuid";
+import Header from './Header';
+import Nav from './Nav';
 
 class Profile extends React.Component {
 
@@ -22,14 +23,15 @@ class Profile extends React.Component {
     })
 
    componentDidMount = () => {
-       Promise.all([fetch('http://localhost:3000/user_lifestages'), fetch('http://localhost:3000/memberships')])
-           .then(([res1, res2]) => {
-                return Promise.all([res1.json(), res2.json()])
+       Promise.all([fetch('http://localhost:3000/user_lifestages'), fetch('http://localhost:3000/memberships'), fetch('http://localhost:3000/lifestages')])
+           .then(([res1, res2, res3]) => {
+                return Promise.all([res1.json(), res2.json(), res3.json()])
             })
-           .then(([res1, res2]) => {
+           .then(([res1, res2, res3]) => {
           
                    this.props.getNewProfileUserLifestages(res1)
                    this.props.getMemberships(res2)
+                   this.props.getLifestages(res3)
                    const lifestageId = this.props.match.params.lifestage_id
                    if (this.props.currentUser){
                     const userMemberships = this.props.allMemberships.filter(m => m.user_id === this.props.currentUser.id)
@@ -41,6 +43,7 @@ class Profile extends React.Component {
             })
     }
     
+
     handleAllGroupsClick = (e) => {
         if (this.props.lifestage.length !==0) {
             const currUserLifestage = this.props.lifestage.filter(ls => ls.users.map(user => (user.id)).includes(this.props.currentUser.id))
@@ -53,7 +56,6 @@ class Profile extends React.Component {
     
             this.props.history.push(`/lifestages/${lifestageId}/grouplist`)
         }
-        
     }
 
     handleDeleteClick = (id) => {
@@ -67,6 +69,7 @@ class Profile extends React.Component {
             })
             .then(res => res.json())
             .then(response => {
+                console.log("helloooo", response)
                 this.props.getNewProfileUserLifestages(response)
             })
         }
@@ -122,18 +125,35 @@ class Profile extends React.Component {
                                 Leave Lifestage
                                 </Button>
                             </Card.Content>
+
                         </Card>
                 )
             })
         }
     }
 
+
+    handleLifestageClick = () => {
+        this.props.history.push('/lifestages/')
+    }
+
+    renderuserCommentLength = () => {
+        return this.props.comments.filter(c => c.user_id === this.props.currentUser.id).length
+    }
+
     render(){
-        console.log(this.props)
+        console.log("props from profile",this.props)
+        console.log("props ", this.props.comments.filter(c => c.user_id === this.props.currentUser.id))
+        const userLifestages= this.props.newProfileUserLifestages.filter(ls => ls.user_id === parseInt(this.props.currentUser.id))
+
+        const userGroups = this.props.allMemberships.filter(m => m.user_id === this.props.currentUser.id)
+
         const { open, dimmer } = this.state
         if (this.props.currentUser){
             return (
             <div >
+                    <Header />
+                    <Nav /> 
                     <Container> 
                         <Grid>
                             <Grid.Row>
@@ -164,18 +184,21 @@ class Profile extends React.Component {
                                 <Grid.Column width={6}>
                                         <h1>Welcome {this.props.currentUser ? this.props.currentUser.name : null} !</h1>
                                         <Divider />
-                                        <h4>Fun Fact: {this.props.currentUser.fun_fact}</h4>
+                                        <h4>FACT: {this.props.currentUser.fun_fact}</h4>
+                                        <Divider />
                                     <Grid columns={3} divided>
                                         <Grid.Row>
                                             <Grid.Column>
                                                 <h4># of Lifestages Joined:</h4>
-                                                <h5>4</h5>
+                                                <h5>{userLifestages.length}</h5>
                                             </Grid.Column>
                                             <Grid.Column>
                                                 <h4># of Groups Joined:</h4> 
+                                                <h5>{userGroups.length}</h5>
                                             </Grid.Column>
                                             <Grid.Column>
                                                 <h4># of Comments Made:</h4> 
+                                                <h5>{this.renderuserCommentLength()}</h5>
                                             </Grid.Column>
                                         </Grid.Row>
                                     </Grid>
@@ -183,26 +206,23 @@ class Profile extends React.Component {
                             </Grid.Row>
                             <Divider horizontal><h2>Your lifestages:</h2></Divider>
                             <Grid.Row>
+                            <div id="renderLsButton">
                                 <div id="lifestageBtn">
-                                    <NavLink to='/lifestages'>
-                                    <Button animated className="ui prof button">
+                                    {/* <NavLink to='/lifestages'> */}
+                                    <Button onClick={this.handleLifestageClick} id="lsButton" animated className="ui prof button">
                                         <Button.Content visible>See More Lifestages</Button.Content>
                                     <Button.Content hidden>
                                             <Icon name='arrow right' />
                                         </Button.Content>
                                     </Button>
-                                    </NavLink>
+                                    {/* </NavLink> */}
                                 </div>
-                                <div>
-                                    <Card.Group>
+                            </div>
                                     {this.renderLifestage()}
-                                    </Card.Group>
-                                </div>
                             </Grid.Row>
                         </Grid>
                     </Container>
                 </div>
-             
             )
         } else {
             return null
@@ -220,7 +240,8 @@ const mapStateToProps = (state) => {
         lifestageId: state.lifestageId,
         allMemberships: state.allMemberships,
         allUserLifestages: state.allUserLifestages,
-        currentUser: state.currentUser
+        currentUser: state.currentUser,
+        comments: state.comments
     }
 }
 

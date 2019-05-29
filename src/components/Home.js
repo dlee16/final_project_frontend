@@ -3,6 +3,14 @@ import { Image, Button } from 'semantic-ui-react'
 
 class Home extends React.Component {
 
+    handleSignInClick= () => {
+        this.props.history.push(`/userlogin`)
+    }
+
+    handleSignUpClick = () => {
+        this.props.history.push(`/signup`)
+    }
+
     render(){
         return (
             
@@ -19,8 +27,8 @@ class Home extends React.Component {
                 </div>
                 <div className="ui hidden divider"></div>
                 <div >
-                    <Button id="home button">SignIn</Button>
-                    <Button>SignUp</Button>
+                    <Button onClick={this.handleSignInClick} id="home button">SignIn</Button>
+                    <Button onClick={this.handleSignUpClick}>SignUp</Button>
                 </div>
                 
             </React.Fragment>
