@@ -46,7 +46,12 @@
   color: white;
 }
 
-.ui.fluid.join.button{
+.ui.mini.submit.button{
+  background-color: #00B0F5;
+  color: white;
+}
+
+.ui.join.button{
   background-color: #00B0F5;
   color: white;
   margin: 10%;
@@ -62,16 +67,51 @@
   
 } */
 
+/* group cards */
+#lsButton{
+  margin-left: 100px;
+}
+
+#renderLsButton{
+  height: 2vh;
+  width: 100vh;
+}
+#test2{
+  background: red;
+  height: 6vh;
+}
+
 #borderimg1 {
   border: 10px solid transparent;
   padding: 15px;
-  border-image: url(/border.png) 30 round;
+  border-image: url(/border1.png) 30 round;
+  margin-top: 6%;
+  margin-right: 2px;
+  /* background: transparent; */
+  background: rgba(196, 104, 104, 0.2)
 }
 
 #borderimg2 {
   border: 10px solid transparent;
   padding: 15px;
-  border-image: url(/border.png) 20% round;
+  border-image: url(/border1.png) 20% round;
+  height: 100%;
+  background: rgba(204, 204, 204, 0.2)
+  /* background: transparent; */
+}
+
+#gcard1{
+padding-bottom: 1%;
+margin-left: 4%;
+padding-top: 1%;
+}
+
+#usergroup{
+  display: flex;
+  align-content: flex-start;
+  flex-direction: row;
+  flex-wrap: wrap;
+  margin-left: 21%;
 }
 
 #borderimg3 {
@@ -92,9 +132,15 @@
   right: 20px;
 }
 
+.edit.button{
+  background: #0bc2c9;
+  color: white;
+}
+
 #process {
   margin-bottom: 40px;
-  overflow-x: hidden;
+  /* overflow-x: hidden; */
+  height: 50vh;
 }
 
 #process .section-heading {
@@ -110,22 +156,22 @@
   margin-top: 20px;
   -ms-transform: skewX(15deg);
   /* IE 9 */
-  -webkit-transform: skewX(15deg);
+  /* -webkit-transform: skewX(15deg); */
   /* Safari */
-  -o-transform: skewX(15deg);
+  /* -o-transform: skewX(15deg); */
   /* Standard syntax */
-  -moz-transform: skewX(15deg);
+  /* -moz-transform: skewX(15deg); */
   background: #0bc2c9
 }
 
-.steps-pane {
+.circle-text {
   height: 140px;
   width: 140px;
-  margin-left: 20%;
-  padding-top: 35%;
+  margin-left: 17%;
+  padding-top: 40%;
 }
 
-@media(min-width: 900px) {
+
   /* timeline line */
   .steps-timeline {
     border-top: 5px double #0bc2c9;
@@ -138,63 +184,59 @@
     float: left;
     width: 20%;
     margin-top: -4.5%;
+    padding-top: 2%;
   }
-  /* outer circle */
-  .step-wrap {
+  /* entire circle and line */
+  /* .step-wrap {
     height: 50px;
     width: 50px;
     border-radius: 50%;
     background: transparent;
-    margin-left: 39%;
+    margin-left: 110px;
     border: 2px solid #0bc2c9;
-  }
+  } */
   
   /* line that connects circles */
-  .verticle-line {
+  /* .verticle-line {
     position: absolute;
-    height: 57px;
-    width: 5px;
+    height: 7%;
+    width: .3%;
     margin-left: 10px;
-    marker-top: 10px;
-  }
-  /* inner circle */
-  .steps-stops {
+    background: #0bc2c9;
+  } */
+  /* outer circle */
+  /* .steps-stops {
     height: 25px;
     width: 25px;
     margin: 11px 10.1px;
     border-radius: 50%;
     background: #0bc2c9;
-  }
-}
+  } */
 
+/* 
 @media (max-width: 600px) {
   #process .container-fluid {
     width: 90%;
   }
-}
+} */
 
-@media (max-width: 400px) {
-  .verticle-line {
-    width: 105px;
-  }
-}
+ 
 /* specific line to connect circle */
-.back-blue {
+/* .back-blue {
   background: #0bc2c9;
-}
+} */
 
 /* flip */
 .flip-card {
-  background-color: transparent;
-  width: 300px;
-  height: 300px;
-  perspective: 1000px;
+  width: 4%;
+  height: 2%;
+  /* perspective: 1000px; */
 }
 
 .flip-card-inner {
   position: relative;
-  width: 100%;
-  height: 100%;
+  width: 270px;
+  height: 270px;
   text-align: center;
   transition: transform 0.6s;
   transform-style: preserve-3d;
@@ -212,23 +254,29 @@
   border-radius: 50%;
   margin-left: 16%;
   margin-right: 10px;
-  right: 35px;
+  left: -2%;
 }
 
 .flip-card-front {
-  
   color: white;
-  background:  #0bc2c9;
+  background:  #00B0F5;
 }
 
 .flip-card-back {
-  background:  #0bc2c9;
-  
+  background:  #00B0F5;
   color: white;
   transform: rotateY(180deg);
 }
 
 /* end of flip */
+
+/* lifestage button */
+.lifestageButton{
+margin-top: -30%;
+padding-top: 14%;
+height:2vh;
+}
+
 
 /* profile card  */
 
@@ -241,7 +289,7 @@
 
 #lifestageBtn {
    display: flex;
-   margin-left: 43%;
+   margin-left: 100px;
    padding-bottom:2%;
    justify-content: center;
 }
@@ -249,79 +297,150 @@
 
 /* comment cards */
 
+#lifestageContainer{
+  display:flex;
+  /* background: black; */
+  flex-direction: row;
+  flex-wrap: wrap;
+  align-content: flex-start;
+  flex-flow: row wrap;
+  margin-left: 7%;
+  margin-right: 7%;
+  margin-top: 2%;
+  padding-left: 6%;
+
+  
+}
+
+.signUp{
+  margin-top: 14%;
+}
+
+.login{
+  margin-top:18%;
+}
+
+#test4{
+  
+  height: 40vh;
+  /* border: 1px solid black; */
+}
+#test5{
+  /* background:green; */
+  /* border: 1px solid black; */
+
+}
+#test6{
+  margin-top: -10%;
+}
+#test7{
+ align-content: center;
+ /* background: black; */
+ width: 100vw;
+ height: 5vh;
+}
 #div1{
-  background: gray;
-  margin-left: 5%;
+  margin-left: 7%;
 }
 
 #div4{
-  background: blue;
   margin-left: 2%;
   width: 30vw;
 }
 #div2{
-  background: red;
   padding-top: 4%;
   height: 70vh;
 }
 
 #div3{
-  background: yellow;
-  width: 30vw; 
-  margin-left:15%;
-  padding-top: .8%;
+  width: 55vw; 
+  margin-left:5%;
+  padding-top: .4%;
   height: 60vh;
 }
 #div5{
-  background: purple;
   width: 27vw;
   margin-left:5%;
 }
 
 #div6{
-  background:orange;
   padding-top: 3%;
 }
 #div7{
-  background: brown;
   margin-left: 23%;
 }
-#div8{
-  background: green;
-  padding-right: 1%;
-  width: 17vw;
+#commentBubble{
+  /* background: green; */
+  width: 40vw;
+  height: 15vh;
+  padding-top: 7%;
+  padding-bottom: 10%;
+  background: rgba(204, 204, 204, 0.1)
 }
 #div9{
-  background: gray;
+  padding-top: 8%;
   padding-right: 1%;
   left: -4%;
-  width: 6vw;
+  width: 7vw;
 }
 #div10{
-  background: beige;
   margin-left: 10%;
   padding-top: 2%;
 }
-
-#comment2{
-  background:green;
-  margin-left: 11%
+.div13{
+  height: 5vh;
+}
+#commentbkgd{
+border: 2px solid #e8347d;
+background: rgba(204, 204, 204, 0.1)
 }
 
+#comment2{
+  margin-left: 11%;
+  width: 40vw;
+}
 
+#groupButton{
+  margin-top: 2px;
+}
+
+.groupDesc{
+  margin-top: 40px;
+  height: 10vh;
+}
+
+.groupName{
+  margin-top: 10px;
+  height: 10vh;
+}
+
+.groupImg{
+  margin-top: 10px;
+}
 
 
 #segment{
   background: transparent;
 }
 
-#comment{
-  background: white;
-  height:16vh;
-  width: 24vw;
-  margin-left: 5%;
+#segment1{
+  border: none;
+  padding-bottom: 1%;
+  margin-bottom: -1.2%;
+  background: transparent;
 }
 
+.test{
+  margin-bottom: 1%;
+  /* background: black; */
+}
+
+#comment{
+
+  height:16vh;
+  width: 40vw;
+  margin-left: 5%;
+}
 
 .speech-bubble-ds {
     background: transparent;
@@ -330,12 +449,12 @@
             border-radius: 4px;
     -webkit-box-shadow: 4px 4px 0#e8347d;
             box-shadow: 4px 4px 0#e8347d;
-    font-size: 1.2rem;
     line-height: 1.3;
     margin: 0 auto 40px;
     width: 100%;
-    padding: 15px;
+    padding: 13px;
     position: relative;
+    /* height:122px; */
 }
 
 .speech-bubble-ds-arrow {

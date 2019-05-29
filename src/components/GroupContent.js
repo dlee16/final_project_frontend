@@ -5,14 +5,26 @@ import CommentContainer from '../containers/CommentContainer';
 import CommentForm from './CommentForm';
 import { ActionCableConsumer } from 'react-actioncable-provider';
 import withAuth from './WithAuth';
-import { Container, Grid, Button, Segment, Divider } from 'semantic-ui-react'
+import { Grid, Button, Segment, Divider, Modal } from 'semantic-ui-react';
+import Header from './Header';
+import Nav from './Nav';
+import v4 from 'uuid';
+
 
 class GroupContent extends React.Component{
 
-    state ={
-        input: "",
-        amCommenting: false
+    state = {
+        open: false,
+        input:""
     }
+
+    show = dimmer => () => this.setState({
+        dimmer, open: true
+    })
+
+    close = () => this.setState({
+        open: false
+    })
 
     // componentDidMount() {
     //     fetch(`http://localhost:3000/comments`)
@@ -61,7 +73,7 @@ class GroupContent extends React.Component{
                 })
             })
                 .then(res => res.json())
-                .then(response => this.props.setComments(response))
+                .then(response =>this.props.setComments(response))
         }
     }
 
@@ -84,12 +96,12 @@ class GroupContent extends React.Component{
                 return comment.group_id === parseInt(this.props.match.params.id)
             }) 
             if (group.length > 0){
-                return <CommentContainer key={group.id} handleCommentInput={this.handleCommentInput} group={group} />
+                return <CommentContainer key={v4()} handleCommentInput={this.handleCommentInput} group={group} />
             } else{
                 return (
-                    
                     <div id="comment2">
                         <div className="speech-bubble-ds">
+                        <br/>
                             <h4>Be the first to comment!</h4>
                         </div>
                     </div>
@@ -98,24 +110,29 @@ class GroupContent extends React.Component{
         }
     }
         
-    render(){      
+    render(){ 
+       console.log(this.props)
+       const groupTopic= this.props.group.find(group => group.id === parseInt(this.props.match.params.id)) 
+        const { open, dimmer } = this.state
+       console.log(groupTopic)
+        console.log(this.props.updatedCommentId)
+    //    console.log(groupTopic.map(users => users.name))
         return (
             <div id="div1">
-                
+                <Header />
+                <Nav /> 
                     <ActionCableConsumer
                         channel={{channel:"FeedChannel"}}
                         onReceived={(comment) => {
-                            console.log("recieved comment", comment)
-                            console.log("recieved comment type", typeof comment.user_comment)
                             this.props.addComment(comment)
                         }}
                     />
-                    <h2>title</h2>
+                    <h2>{this.props.group.length > 0 ? groupTopic.name : "Loading..."}</h2>
                 <div id="div2">
                     
                     <Grid >
                             <div id="div3">
-                            <Segment style={{ overflow: 'auto', maxHeight: 500 }} id="segment">
+                            <Segment style={{ overflow: 'auto', minHeight: 550, maxHeight: 550 }} id="segment">
 
                                 <Grid.Column width={10}>
                                     {this.renderComments()}
@@ -128,11 +145,29 @@ class GroupContent extends React.Component{
                                 
                                 <Divider />
                                 <div id="div7">
-                                    <Button className="ui prof button">See all members of group</Button>
+                                    <Button onClick={this.show('inverted')} className="ui prof button">See all members of group</Button>
+
+                                    <Modal dimmer={dimmer} open={open} onClose={this.close}>
+                                        <Modal.Header>Members:</Modal.Header>
+                                        <Modal.Content>
+                                            <Modal.Description>
+                                                <li>{this.props.group.length > 0 ? groupTopic.users.map(users => users.name).join(" , ") : "loading"}</li>
+                                               {/* { this.props.group.length > 0 ?
+                                                {groupTopic.users.map(users => <li>{users.name}</li>)}} */}
+                                            </Modal.Description>
+                                        </Modal.Content>
+                                        <Modal.Actions>
+                                            <Button color='black' onClick={this.close}>
+                                                Close
+                                                </Button>
+                                        </Modal.Actions>
+                                    </Modal>
+
+
                                 </div>
-                                <div>
+                                {/* <div>
                                     <Button onClick={this.handleBackButton} className="ui prof button">Back to Profile</Button>
-                                </div>
+                                </div> */}
                             </Grid.Column>
                             </div>
                         </Grid>

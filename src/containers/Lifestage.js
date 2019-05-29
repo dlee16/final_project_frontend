@@ -1,8 +1,10 @@
 import React from 'react';
-import { getLifestages, getUserLifestages, getAllUserLifestages, setNewLifestage } from '../actions';
+import { getLifestages, getUserLifestages, getAllUserLifestages, setNewLifestage, joinLifestage } from '../actions';
 import { connect } from 'react-redux';
 import withAuth from '../components/WithAuth';
-import { Button } from 'semantic-ui-react' 
+import { Button } from 'semantic-ui-react';
+import Header from '../components/Header';
+import Nav from '../components/Nav';
 
 class Lifestage extends React.Component {
 
@@ -37,7 +39,6 @@ class Lifestage extends React.Component {
             .then(this.props.getUserLifestages)
     }
 
-
     handleClick =(e) => {
             const id = parseInt(e.target.id)
             this.addUserLifestage(id, this.props.currentUser.id)
@@ -46,12 +47,14 @@ class Lifestage extends React.Component {
     
             if (e.target.value ==="joined"){
                 const lifestage = currUserLifestage.find(ls => ls.id === id)
-        
+                
                 this.props.setNewLifestage(lifestage)
               
                 this.props.history.push(`/lifestages/${id}/grouplist`)
-            } else {
+        } else {
                 const lifestage = this.props.lifestage.find(ls => ls.id === id)
+                
+                this.props.joinLifestage({ id: parseInt(e.target.id), name: e.target.name, description: e.target.dataset.des })
 
                 this.props.setNewLifestage(lifestage)
 
@@ -80,159 +83,136 @@ class Lifestage extends React.Component {
     
     renderLifestage = () => {
         const userLifestage= this.props.lifestage.filter(ls => ls.users.map(u => u.id).includes(this.props.currentUser.id))
+
+
+        const usls = this.props.lifestage.filter(ls => this.props.currentUser.lifestages.find(userls => userls.id === ls.id))
+        
+        const new_usls = usls.map(ls => ls.id)
+        console.log("HELLO", usls)
+
         if (this.props.lifestage.length > 0 && this.props.currentUser.id){
-        return this.props.lifestage.map(ls => {
+        // return this.props.lifestage.map(ls => {
             // debugger
-            if (userLifestage.map(ls => ls.id).includes(ls.id)){
-                return (
-                    <div className="container-fluid">
-                        <div className="row">
-                            <div className="steps-one">
-                                <div className="step-wrap">
-                                    <div className="steps-stops">
-                                        <div className="verticle-line back-blue"></div>
-                                    </div>
-                                </div>
-                                <div className="flip-card">
-                                    <div className="flip-card-inner">
-                                        <div className="flip-card-front">
-                                            <div className="steps-pane">
-                                                <h3>{ls.name}</h3>
-                                            </div>
-                                        </div>
-                                        <div className="flip-card-back">
-                                            <div className="steps-pane">
-                                                <p>{ls.description}</p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <Button onClick={this.handleClick} id={ls.id} value="joined" className="ui fluid join button">
-                                Joined: See all groups
-                                </Button>
-                            </div>
-                        </div>
-                    </div>
-                )
-            } else {
-                return( 
-                        <div className="container-fluid">
-                            <div className="row">
-                                <div className="steps-one">
-                                    <div className="step-wrap">
+            // if (userLifestage.map(ls => ls.id).includes(ls.id)){
+            return (
+                this.props.lifestage.map(ls =>{
+                    if (new_usls.includes(ls.id)) {
+                        return (         
+                            // <div key={v4()} >
+                                <div id="test3" >
+                                    {/* <div className="step-wrap">
                                         <div className="steps-stops">
-                                            <div className="verticle-line back-blue"></div>
+                                            <div className="verticle-line"></div>
                                         </div>
-                                    </div>
+                                    </div> */}
+                                    
+                                    <div id="test4">
+
+                                        <div id="test5">
                                     <div className="flip-card">
                                         <div className="flip-card-inner">
                                             <div className="flip-card-front">
-                                                <div className="steps-pane">
+                                                <div className="circle-text">
                                                     <h3>{ls.name}</h3>
                                                 </div>
                                             </div>
                                             <div className="flip-card-back">
-                                                <div className="steps-pane">
+                                                <div className="circle-text">
                                                     <p>{ls.description}</p>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
-                                    <Button onClick={this.handleClick} id={ls.id} value="join" className="ui fluid join button">
-                                        Join
-                                    </Button>
+                                </div>
+                                <div id="test6">
+                                    <div className="lifestageButton">
+                                            <Button onClick={this.handleClick} value="joined" id={ls.id} data-des={ls.description} name={ls.name} className="ui join button">
+                                            Joined: See all groups
+                                        </Button>
+                                    </div>
+                                        </div>
+
+                                    </div>
+                                </div>
+                                // </div>
+                            
+                            
+                        )} else {
+                        return (
+                            // <div key={v4()} >
+                                <div id="test3" >
+                                    {/* <div className="step-wrap">
+                                        <div className="steps-stops">
+                                            <div className="verticle-line"></div>
+                                        </div>
+                                    </div> */}
+                                    <div id="test4">
+                                <div id="test5">
+
+                                    
+                                    <div className="flip-card">
+                                        <div className="flip-card-inner">
+                                            <div className="flip-card-front">
+                                                <div className="circle-text">
+                                                    <h3>{ls.name}</h3>
+                                                </div>
+                                            </div>
+                                            <div className="flip-card-back">
+                                                <div className="circle-text">
+                                                    <p>{ls.description}</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                        <div id="test6">
+                                    <div className="lifestageButton">
+                                            <Button onClick={this.handleClick} value="join" id={ls.id} data-des={ls.description} name={ls.name} className="ui join button">
+                                            Join
+                                            </Button>
+                                    </div>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-
-
-
-
-
-
-
-
-
-
-                        /* <Grid columns='equal'>
-                            <Grid.Row stretched>
-                                <img src="../ls1.png" className="ls1" width="225px" height="225px" alt="hello"/>
-                                <Grid.Column>
-                                    <Card.Group >
-                                        <Card>
-                                            <Card.Content>
-                                                <Card.Header>{ls.name}</Card.Header>
-                                                <Card.Description>
-                                                    {ls.description}
-                                                </Card.Description>
-                                            </Card.Content>
-                                            <Card.Content extra>
-                                                <Button onClick={this.handleClick} id={ls.id} value="join" className="ui fluid submit button">
-                                                Join
-                                                </Button>
-                                            </Card.Content>
-                                        </Card>
-                                    </Card.Group>
-                            </Grid.Column>
-                        </Grid.Row>
-                    </Grid> */
-
-                //    </div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-                )
-            }
-        })
-    }
+                            // </div>
+                        )
+                    }
+                    }))}
 }
 
     render(){
         console.log("ls", this.props.lifestage)
         console.log("uls", this.props.userLifestages)
+        console.log("props", this.props)
+        // console.log("user", this.props.currentUser.lifestages)
+// debugger
         return (
-            // <React.Fragment>
-            // <div className="ui stackable center aligned grid container">
-            //     <div>
-            //         <h2>Lifestages:</h2>
+            <div>
+                <Header />
+                <Nav /> 
+
+            <div id="lifestageContainer">
+                <div id="test7">
+                    <h2 className="text-center">Join a lifestage:</h2>
+
+                </div>
+                { this.renderLifestage() }
+            </div>
+            </div>
+            // <section id="process">
+            //     <div className="row">
+            //         <div className="section-heading">
+            //         <h2 className="text-center">Join a lifestage:</h2>
+            //         </div>
             //     </div>
-            //     <Grid>
-            //         <Grid.Row>            
-            //             {this.renderLifestage()}
-            //         </Grid.Row>
-            //     </Grid>
-
-
-
-
-
-
-
-
-<section id="process">
-  <div className="row">
-    <div className="section-heading">
-      <h2 className="text-center">Join a lifestage:</h2>
-    </div>
-  </div>
-  <div className="container-fluid">
-    <div className="row">
-      <div className="steps-timeline text-center">
-            {this.renderLifestage()}
-      </div>
-    </div>
-  </div>
-</section>
+            //     <div className="container-fluid">
+            //         <div className="row">
+            //         <div className="steps-timeline text-center">
+            //                 {this.renderLifestage()}
+            //         </div>
+            //         </div>
+            //     </div>
+            // </section>
 
 
 
@@ -284,6 +264,9 @@ const mapDispatchToProps = (dispatch) => {
         },
         setNewLifestage: (lifestage) => {
             dispatch(setNewLifestage(lifestage))
+        },
+        joinLifestage: (lifestage) => {
+            dispatch(joinLifestage(lifestage))
         }
     }
 }
