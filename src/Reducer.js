@@ -9,7 +9,7 @@ const defaultState = {
     newlySetLifestage:[],
     profileUserGroups: [],
     newProfileUserLifestages: [],
-    updatedCommentId: [],
+    updatedCommentId: null,
     lifestageId: [],
     allMemberships: [],
     allUserLifestages: [],

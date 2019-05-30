@@ -99,16 +99,16 @@ class Lifestage extends React.Component {
                     if (new_usls.includes(ls.id)) {
                         return (         
                             // <div key={v4()} >
-                                <div id="test3" >
+                            <div id="test3" >
                                     {/* <div className="step-wrap">
                                         <div className="steps-stops">
                                             <div className="verticle-line"></div>
                                         </div>
                                     </div> */}
                                     
-                                    <div id="test4">
+                                <div id="lsContainer">
 
-                                        <div id="test5">
+                                    <div id="lsCircle">
                                     <div className="flip-card">
                                         <div className="flip-card-inner">
                                             <div className="flip-card-front">
@@ -124,30 +124,30 @@ class Lifestage extends React.Component {
                                         </div>
                                     </div>
                                 </div>
-                                <div id="test6">
+                                <div id="buttonSpacing">
                                     <div className="lifestageButton">
                                             <Button onClick={this.handleClick} value="joined" id={ls.id} data-des={ls.description} name={ls.name} className="ui join button">
                                             Joined: See all groups
                                         </Button>
                                     </div>
-                                        </div>
-
-                                    </div>
                                 </div>
+
+                            </div>
+                        </div>
                                 // </div>
                             
                             
                         )} else {
                         return (
                             // <div key={v4()} >
-                                <div id="test3" >
+                                <div id="test3">
                                     {/* <div className="step-wrap">
                                         <div className="steps-stops">
                                             <div className="verticle-line"></div>
                                         </div>
                                     </div> */}
-                                    <div id="test4">
-                                <div id="test5">
+                                <div id="lsContainer">
+                                <div id="lsCircle">
 
                                     
                                     <div className="flip-card">
@@ -165,7 +165,7 @@ class Lifestage extends React.Component {
                                         </div>
                                     </div>
                                 </div>
-                                        <div id="test6">
+                                        <div id="buttonSpacing">
                                     <div className="lifestageButton">
                                             <Button onClick={this.handleClick} value="join" id={ls.id} data-des={ls.description} name={ls.name} className="ui join button">
                                             Join
@@ -196,7 +196,10 @@ class Lifestage extends React.Component {
                     <h2 className="text-center">Join a lifestage:</h2>
 
                 </div>
+                
+
                 { this.renderLifestage() }
+               
             </div>
             </div>
             // <section id="process">

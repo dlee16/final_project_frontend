@@ -109,13 +109,24 @@ class GroupContent extends React.Component{
             }
         }
     }
+
+    // renderMembers = () => {
+    //     const groupTopic = this.props.group.find(group => group.id === parseInt(this.props.match.params.id))
+    //     groupTopic.users.map(users => {
+    //         return (
+    //             <div>
+    //                 <li>{users.name}</li>
+    //             </div>
+    //         )
+    //     })
+    // }
         
     render(){ 
-       console.log(this.props)
+       console.log("prop from GC", this.props)
        const groupTopic= this.props.group.find(group => group.id === parseInt(this.props.match.params.id)) 
         const { open, dimmer } = this.state
-       console.log(groupTopic)
-        console.log(this.props.updatedCommentId)
+       console.log("grouptopic", groupTopic)
+        console.log("commentId",this.props.updatedCommentId)
     //    console.log(groupTopic.map(users => users.name))
         return (
             <div id="div1">
@@ -143,17 +154,15 @@ class GroupContent extends React.Component{
                             <Grid.Column width={6}>
                                 <CommentForm handleEditCommentClick={this.handleEditCommentClick} handleSubmit={this.handleSubmit} value={this.state.editComment} handleCommentInput={this.handleCommentInput} input={this.state.input}/> 
                                 
-                                <Divider />
+                                {/* <Divider />
                                 <div id="div7">
-                                    <Button onClick={this.show('inverted')} className="ui prof button">See all members of group</Button>
+                                    <Button onClick={this.show('inverted')} className="ui prof button">See all members of group</Button> */}
 
-                                    <Modal dimmer={dimmer} open={open} onClose={this.close}>
+                                    {/* <Modal dimmer={dimmer} open={open} onClose={this.close}>
                                         <Modal.Header>Members:</Modal.Header>
                                         <Modal.Content>
                                             <Modal.Description>
-                                                <li>{this.props.group.length > 0 ? groupTopic.users.map(users => users.name).join(" , ") : "loading"}</li>
-                                               {/* { this.props.group.length > 0 ?
-                                                {groupTopic.users.map(users => <li>{users.name}</li>)}} */}
+                                               { this.renderMembers()}
                                             </Modal.Description>
                                         </Modal.Content>
                                         <Modal.Actions>
@@ -161,10 +170,10 @@ class GroupContent extends React.Component{
                                                 Close
                                                 </Button>
                                         </Modal.Actions>
-                                    </Modal>
+                                    </Modal> */}
 
 
-                                </div>
+                                {/* </div> */}
                                 {/* <div>
                                     <Button onClick={this.handleBackButton} className="ui prof button">Back to Profile</Button>
                                 </div> */}
@@ -180,7 +189,6 @@ class GroupContent extends React.Component{
 
 const mapStateToProps = (state) => {
     return {
-        // loggedIn: !!state.currentUser.id,
         group: state.group,
         comments: state.comments,
         updatedCommentId: state.updatedCommentId,
