@@ -213,12 +213,12 @@ padding-top: 1%;
     background: #0bc2c9;
   } */
 
-/* 
-@media (max-width: 600px) {
+
+
   #process .container-fluid {
     width: 90%;
   }
-} */
+
 
  
 /* specific line to connect circle */
@@ -320,17 +320,21 @@ height:2vh;
   margin-top:18%;
 }
 
-#test4{
+#lsContainer{
   
   height: 40vh;
-  /* border: 1px solid black; */
+  border-top: 5px double #0bc2c9;
+    padding-top: 20px;
+    margin-top: 40px;
+    margin-left: 3%;
+    margin-right: 3%;
 }
-#test5{
-  /* background:green; */
-  /* border: 1px solid black; */
+#lsCircle{
+/* background: purple; */
 
 }
-#test6{
+
+#buttonSpacing{
   margin-top: -10%;
 }
 #test7{
@@ -395,6 +399,10 @@ border: 2px solid #e8347d;
 background: rgba(204, 204, 204, 0.1)
 }
 
+.commentSpacing{
+margin-bottom: 9%;
+}
+
 #comment2{
   margin-left: 11%;
   width: 40vw;
@@ -450,11 +458,11 @@ background: rgba(204, 204, 204, 0.1)
     -webkit-box-shadow: 4px 4px 0#e8347d;
             box-shadow: 4px 4px 0#e8347d;
     line-height: 1.3;
-    margin: 0 auto 40px;
+    /* margin: 0 auto 40px; */
     width: 100%;
-    padding: 13px;
+    padding: 2%;
     position: relative;
-    /* height:122px; */
+    /* height:100%; */
 }
 
 .speech-bubble-ds-arrow {

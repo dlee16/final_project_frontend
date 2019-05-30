@@ -76,7 +76,7 @@ class GroupList extends React.Component {
                 
                 <form onSubmit={this.handleSubmit} action="">
                     <input type="text" placeholder="Group name" onChange={this.handleChange} name="groupName" value={this.state.groupName}/>
-                    <input type="text" placeholder="Group description" onChange={this.handleChange} name="groupDescription" value={this.state.groupDesc}/>
+                    <input type="text" placeholder="Group description" onChange={this.handleChange} name="groupDescription" value={this.state.groupDescription}/>
 
                     <input type="submit" className="ui prof button" value="submit"/>
                 </form>

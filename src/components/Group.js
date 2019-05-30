@@ -71,7 +71,7 @@ class Group extends React.Component {
                             <h2>{this.props.group.name}</h2>
                         </div>
                         <div className="groupImg">
-                                <img src={require('./question.png')} height="100px" width="100px" alt="broken" />
+                                <img src={require('./group1.png')} height="100px" width="100px" alt="broken" />
 
                         </div>
                             

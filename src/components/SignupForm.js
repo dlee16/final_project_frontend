@@ -15,6 +15,9 @@ class SignupForm extends React.Component {
         })
     }
 
+    handleClick = () => {
+        this.props.history.push('/userlogin')
+    }
 
     handleSubmit = () => {
         this.props.createUser(this.state)
@@ -66,6 +69,8 @@ class SignupForm extends React.Component {
                         <button className="ui fluid large submit button" >Sign up!</button>
                         </div>
                     </form>
+                        <div className="ui horizontal divider">Or</div>
+                        <button onClick={this.handleClick} className="ui large submit button" >Log in</button>
                     
                 </div>
             </div>

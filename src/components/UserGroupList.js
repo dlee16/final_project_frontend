@@ -20,7 +20,6 @@ class UserGroupList extends React.Component{
     // }
 
     renderGroups = () => {
-        console.log("props in ugl", this.props)
         const lifestageId = this.props.match.params.lifestage_id
         if (this.props.profileUserGroups.length === 0 && this.props.currentUser){
             fetch(`http://localhost:3000/memberships`)
@@ -35,18 +34,10 @@ class UserGroupList extends React.Component{
         })
         }
         else if (this.props.profileUserGroups.length !==0 ){
-            // debugger
-            // if (this.props.lifestageId.length === 0){
-            //     return this.props.profileUserGroups.map(group => {
-            //         return <Group key={group.id} group={group.group} />
-            //     })
-            // } else{
-        
                 const filtered = this.props.profileUserGroups.filter(group => group.group.lifestage_id === parseInt(lifestageId))
                 return filtered.map( group => {
                     return <Group key={group.id} group={group.group} value="joined" />
                 })
-            // }
         }
     }
 
