@@ -1,3 +1,7 @@
+h2,h3,h4,h5{
+  font-family: 'Hammersmith One', sans-serif;
+}
+
 .App {
   text-align: center;
 }
@@ -66,18 +70,27 @@
   background: rgba(204, 204, 204, 0.5)
   
 } */
-
+.profileLS{
+margin-left: 30px;
+align-content: stretch;
+width: 70vw;
+}
 /* group cards */
 #lsButton{
-  margin-left: 100px;
+  /* margin-left: 10%; */
+  /* background: purple; */
+  /* width: 60vw; */
+}
+#lsCard{
+/* background: black; */
+display: flex
 }
 
 #renderLsButton{
-  height: 2vh;
-  width: 100vh;
+  height: 4vh;
+  width: 130vh;
 }
 #test2{
-  background: red;
   height: 6vh;
 }
 
@@ -289,7 +302,7 @@ height:2vh;
 
 #lifestageBtn {
    display: flex;
-   margin-left: 100px;
+   margin-left: 130px;
    padding-bottom:2%;
    justify-content: center;
 }
@@ -320,10 +333,21 @@ height:2vh;
   margin-top:18%;
 }
 
+
+#profileLsContainer{
+  /* background: green; */
+  width: 100vw;
+  display: flex;
+  align-content: flex-start;
+  flex-direction: row;
+  flex-wrap: wrap;
+}
+
+
 #lsContainer{
   
   height: 40vh;
-  border-top: 5px double #0bc2c9;
+  /* border-top: 5px double #0bc2c9; */
     padding-top: 20px;
     margin-top: 40px;
     margin-left: 3%;
@@ -331,8 +355,17 @@ height:2vh;
 }
 #lsCircle{
 /* background: purple; */
-
 }
+
+.about{
+  /* background: blue; */
+  width: 50vw;
+  margin-left: 30%;
+  border: 2px solid white;
+  padding: 2%;
+  background: rgba(204, 204, 204, 0.1)
+}
+
 
 #buttonSpacing{
   margin-top: -10%;
@@ -860,4 +893,8 @@ margin-bottom: 9%;
             transform: translateX(0);
     opacity: 1;
   }
+}
+
+#nav {
+  background-color: black !important;
 }

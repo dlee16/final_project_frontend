@@ -5,7 +5,7 @@ import CommentContainer from '../containers/CommentContainer';
 import CommentForm from './CommentForm';
 import { ActionCableConsumer } from 'react-actioncable-provider';
 import withAuth from './WithAuth';
-import { Grid, Button, Segment, Divider, Modal } from 'semantic-ui-react';
+import { Grid, Segment } from 'semantic-ui-react';
 import Header from './Header';
 import Nav from './Nav';
 import v4 from 'uuid';
@@ -18,13 +18,13 @@ class GroupContent extends React.Component{
         input:""
     }
 
-    show = dimmer => () => this.setState({
-        dimmer, open: true
-    })
+    // show = dimmer => () => this.setState({
+    //     dimmer, open: true
+    // })
 
-    close = () => this.setState({
-        open: false
-    })
+    // close = () => this.setState({
+    //     open: false
+    // })
 
     // componentDidMount() {
     //     fetch(`http://localhost:3000/comments`)
@@ -122,12 +122,9 @@ class GroupContent extends React.Component{
     // }
         
     render(){ 
-       console.log("prop from GC", this.props)
        const groupTopic= this.props.group.find(group => group.id === parseInt(this.props.match.params.id)) 
-        const { open, dimmer } = this.state
-       console.log("grouptopic", groupTopic)
-        console.log("commentId",this.props.updatedCommentId)
-    //    console.log(groupTopic.map(users => users.name))
+        // const { open, dimmer } = this.state
+      
         return (
             <div id="div1">
                 <Header />
