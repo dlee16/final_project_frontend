@@ -27,8 +27,8 @@ class Home extends React.Component {
                 </div>
                 <div className="ui hidden divider"></div>
                 <div >
-                    <Button onClick={this.handleSignInClick} id="home button">SignIn</Button>
-                    <Button onClick={this.handleSignUpClick}>SignUp</Button>
+                    <Button onClick={this.handleSignInClick} className="ui submit button">SignIn</Button>
+                    <Button onClick={this.handleSignUpClick} className="ui submit button">SignUp</Button>
                 </div>
                 
             </React.Fragment>

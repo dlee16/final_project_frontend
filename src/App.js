@@ -50,6 +50,7 @@ class App extends React.Component {
 
 
     const token = localStorage.getItem("token")
+    // debugger
     if (token){
       fetch("http://localhost:3000/auto_login", {
         headers: {
@@ -58,7 +59,7 @@ class App extends React.Component {
       })
         .then(res => res.json())
         .then((response) => {
-          if (response){
+          if (response.errors){
             alert(response.errors)
           } else {
             this.props.setCurrentUser(response)
@@ -100,7 +101,6 @@ class App extends React.Component {
 
 
   setCurrentUser = (response) => {
-    console.log("bye")
     this.props.setCurrentUser(response.user)
     localStorage.setItem("token", response.token)
     // debugger

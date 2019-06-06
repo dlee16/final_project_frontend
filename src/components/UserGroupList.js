@@ -42,8 +42,6 @@ class UserGroupList extends React.Component{
     }
 
     render(){
-        console.log("prof ls", this.props.profileUserGroups)
-        console.log("lsid", this.props.lifestageId)
         return(
             <div >
                 <Header />

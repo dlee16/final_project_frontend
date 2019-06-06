@@ -13,17 +13,17 @@ class Lifestage extends React.Component {
         userLifestages: []
     }
 
-    componentDidMount = () => {
-        fetch('http://localhost:3000/lifestages')
-        .then(res => res.json())
-        .then((response) => {
-            this.props.getLifestages(response)
-            if (this.props.currentUser){
-                const filteredLs = this.props.lifestage.filter(ls => ls.users.map(u => u.id).includes(this.props.currentUser.id))
-                this.props.getAllUserLifestages(filteredLs)
-            }
-        })
-    }
+    // componentDidMount = () => {
+    //     fetch('http://localhost:3000/lifestages')
+    //     .then(res => res.json())
+    //     .then((response) => {
+    //         this.props.getLifestages(response)
+    //         if (this.props.currentUser){
+    //             const filteredLs = this.props.lifestage.filter(ls => ls.users.map(u => u.id).includes(this.props.currentUser.id))
+    //             this.props.getAllUserLifestages(filteredLs)
+    //         }
+    //     })
+    // }
 
     addUserLifestage = (id, user) => {
         fetch('http://localhost:3000/user_lifestages', {
@@ -99,7 +99,7 @@ class Lifestage extends React.Component {
                     if (new_usls.includes(ls.id)) {
                         return (         
                             // <div key={v4()} >
-                            <div id="test3" >
+                            <div key={v4()} id="test3" >
                                     {/* <div className="step-wrap">
                                         <div className="steps-stops">
                                             <div className="verticle-line"></div>
@@ -181,7 +181,6 @@ class Lifestage extends React.Component {
 }
 
     render(){
-        console.log(this.props.lifestage)
         return (
             <div>
                 <Header />

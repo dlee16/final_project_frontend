@@ -40,6 +40,17 @@ h2,h3,h4,h5{
   background-color: #0bc2c9;
   color: white;
 }
+.ui.submit.button{
+  background-color: #0bc2c9;
+  color: white;
+}
+.ui.submit.button2{
+  background-color: #00B0F5;
+  color: white;
+}
+
+
+
 
 .ui.login.image.header{
   color: #e8347d;

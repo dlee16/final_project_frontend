@@ -162,7 +162,7 @@ class Profile extends React.Component {
                                     </div>
                                     <div id="div10">
 
-                                    <Button onClick={this.show('inverted')}>Edit Profile</Button>
+                                        <Button onClick={this.show('inverted')} className="ui submit button2">Edit Profile</Button>
                                     </div>
                                 
                                         <Modal dimmer={dimmer} open={open} onClose={this.close}>
@@ -211,7 +211,7 @@ class Profile extends React.Component {
                             <div id="renderLsButton">
                                 <div id="lifestageBtn">
                                     {/* <NavLink to='/lifestages'> */}
-                                    <Button onClick={this.handleLifestageClick} id="lsButton" animated className="ui prof button">
+                                        <Button onClick={this.handleLifestageClick} id="lsButton" animated className="ui submit button2">
                                         <Button.Content visible>See More Lifestages</Button.Content>
                                     <Button.Content hidden>
                                             <Icon name='arrow right' />

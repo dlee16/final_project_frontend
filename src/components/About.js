@@ -15,7 +15,7 @@ class About extends React.Component{
                     </p>
                     <p>So bring on the encouragment and know that you are exactly where you need to be in life. Don't give up! </p>
 
-                    <p> <span>💛</span> Diana</p>
+                    <span role="img" aria-label="yellow_heart">💛Diana</span>
                 </div>
             </div>
         )
