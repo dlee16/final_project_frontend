@@ -28,8 +28,6 @@ class GroupList extends React.Component {
                 const grp = this.props.group.filter(group => group.lifestage_id === parseInt(lifestageId))
     
         return grp.map( group => {
-            console.log("grou",group)
-            console.log("users", group.users)
             return <Group key={group.id} group={group} users={group.users}/> 
         })
     }

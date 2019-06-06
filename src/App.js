@@ -23,29 +23,61 @@ class App extends React.Component {
   // }
 
   componentDidMount(){
+    // const token = localStorage.getItem("token")
+    // if (token){
+    //   Promise.all([fetch("http://localhost:3000/auto_login", {
+    //     headers: {
+    //       "Authorization": token
+    //     }
+      // }), fetch('http://localhost:3000/comments'), fetch('http://localhost:3000/memberships'), fetch('http://localhost:3000/lifestages'), fetch('http://localhost:3000/groups')])
+      //   .then(([res1, res2, res3, res4, res5]) => {
+      //     return Promise.all([res1.json(), res2.json(), res3.json(), res4.json(), res5.json()])
+      //   })
+      //   .then(([res1, res2, res3, res4, res5]) => {
+      //     if (res1.errors){
+      //       alert(res1.errors)
+      //     } else {
+      //       this.props.setCurrentUser(res1)
+      //       }
+      //     this.props.setComments(res2)
+      //     this.props.getUserLifestages(res3)
+      //     this.props.getLifestages(res4)
+      //     this.props.getGroups(res5)
+      //     }
+    //     )
+    //   }
+
+
+
     const token = localStorage.getItem("token")
+    // debugger
     if (token){
-      Promise.all([fetch("http://localhost:3000/auto_login", {
+      fetch("http://localhost:3000/auto_login", {
         headers: {
           "Authorization": token
         }
-      }), fetch('http://localhost:3000/comments'), fetch('http://localhost:3000/memberships'), fetch('http://localhost:3000/lifestages'), fetch('http://localhost:3000/groups')])
-        .then(([res1, res2, res3, res4, res5]) => {
-          return Promise.all([res1.json(), res2.json(), res3.json(), res4.json(), res5.json()])
-        })
-        .then(([res1, res2, res3, res4, res5]) => {
-          if (res1.errors){
-            alert(res1.errors)
+      })
+        .then(res => res.json())
+        .then((response) => {
+          if (response.errors){
+            alert(response.errors)
           } else {
-            this.props.setCurrentUser(res1)
+            this.props.setCurrentUser(response)
             }
-          this.props.setComments(res2)
-          this.props.getUserLifestages(res3)
-          this.props.getLifestages(res4)
-          this.props.getGroups(res5)
           }
         )
       }
+
+    Promise.all([fetch('http://localhost:3000/comments'), fetch('http://localhost:3000/memberships'), fetch('http://localhost:3000/lifestages'), fetch('http://localhost:3000/groups')])
+      .then(([res1, res2, res3, res4]) => {
+      return Promise.all([res1.json(), res2.json(), res3.json(), res4.json()])
+    })
+      .then(([res1, res2, res3, res4]) => {
+        this.props.setComments(res1)
+        this.props.getUserLifestages(res2)
+        this.props.getLifestages(res3)
+        this.props.getGroups(res4)
+    })
   }
 
   createUser = (user) => {
@@ -69,7 +101,6 @@ class App extends React.Component {
 
 
   setCurrentUser = (response) => {
-    console.log("bye")
     this.props.setCurrentUser(response.user)
     localStorage.setItem("token", response.token)
     // debugger

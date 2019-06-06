@@ -26,9 +26,6 @@ class CommentForm extends React.Component {
     }
 
     render(){
-        console.log("commentform", this.props.updatedCommentId)
-        console.log(this.state)
-        console.log(this.state)
         if (this.props.updatedCommentId){
         return(
             <div id="div5">

@@ -44,7 +44,6 @@ class Group extends React.Component {
     renderButtonText = () => {
         if (this.props.currentUser && this.props.group.users.find(u => u.id === this.props.currentUser.id)) {
         const users = this.props.group.users.filter(user => user.id !== this.props.currentUser.id)
-        console.log(users)
             return (
                 <div>
                     <button onClick={this.handleClick} className="ui fluid  submit button">See all comments</button>
@@ -59,10 +58,7 @@ class Group extends React.Component {
     }
 
     render(){ 
-        console.log("prof user groups", this.props.profileUserGroups)
-        console.log("props", this.props)
-        console.log("props grp from parent", this.props.group)
-        return (
+       return (
             <div id="gcard1">
                 <div className="ui card" id="borderimg2">
                     <div className="column">

@@ -5,6 +5,7 @@ import withAuth from '../components/WithAuth';
 import { Button } from 'semantic-ui-react';
 import Header from '../components/Header';
 import Nav from '../components/Nav';
+import v4 from 'uuid';
 
 class Lifestage extends React.Component {
 
@@ -82,13 +83,12 @@ class Lifestage extends React.Component {
     // }
     
     renderLifestage = () => {
-        const userLifestage= this.props.lifestage.filter(ls => ls.users.map(u => u.id).includes(this.props.currentUser.id))
+        // const userLifestage= this.props.lifestage.filter(ls => ls.users.map(u => u.id).includes(this.props.currentUser.id))
 
 
         const usls = this.props.lifestage.filter(ls => this.props.currentUser.lifestages.find(userls => userls.id === ls.id))
         
         const new_usls = usls.map(ls => ls.id)
-        console.log("HELLO", usls)
 
         if (this.props.lifestage.length > 0 && this.props.currentUser.id){
         // return this.props.lifestage.map(ls => {
@@ -99,7 +99,7 @@ class Lifestage extends React.Component {
                     if (new_usls.includes(ls.id)) {
                         return (         
                             // <div key={v4()} >
-                            <div id="test3" >
+                            <div key={v4()} id="test3" >
                                     {/* <div className="step-wrap">
                                         <div className="steps-stops">
                                             <div className="verticle-line"></div>
@@ -140,7 +140,7 @@ class Lifestage extends React.Component {
                         )} else {
                         return (
                             // <div key={v4()} >
-                                <div id="test3">
+                                <div key ={v4()} >
                                     {/* <div className="step-wrap">
                                         <div className="steps-stops">
                                             <div className="verticle-line"></div>
@@ -181,11 +181,6 @@ class Lifestage extends React.Component {
 }
 
     render(){
-        console.log("ls", this.props.lifestage)
-        console.log("uls", this.props.userLifestages)
-        console.log("props", this.props)
-        // console.log("user", this.props.currentUser.lifestages)
-// debugger
         return (
             <div>
                 <Header />

@@ -69,7 +69,6 @@ class Profile extends React.Component {
             })
             .then(res => res.json())
             .then(response => {
-                console.log("helloooo", response)
                 this.props.getNewProfileUserLifestages(response)
             })
         }
@@ -110,6 +109,7 @@ class Profile extends React.Component {
             const currUserLifestage= this.props.newProfileUserLifestages.filter(ls => ls.user_id === parseInt(this.props.currentUser.id))
             return currUserLifestage.map(ls => {
                 return (
+                    <div key={v4()} id="lsCard">
                         <Card key={v4()} id="borderimg1">
                             <Card.Content>
                                 <h2 className="header">{ls.lifestage_name}</h2>
@@ -127,6 +127,7 @@ class Profile extends React.Component {
                             </Card.Content>
 
                         </Card>
+                    </div>
                 )
             })
         }
@@ -142,8 +143,6 @@ class Profile extends React.Component {
     }
 
     render(){
-        console.log("props from profile",this.props)
-        console.log("props ", this.props.comments.filter(c => c.user_id === this.props.currentUser.id))
         const userLifestages= this.props.newProfileUserLifestages.filter(ls => ls.user_id === parseInt(this.props.currentUser.id))
 
         const userGroups = this.props.allMemberships.filter(m => m.user_id === this.props.currentUser.id)
@@ -163,7 +162,7 @@ class Profile extends React.Component {
                                     </div>
                                     <div id="div10">
 
-                                    <Button onClick={this.show('inverted')}>Edit Profile</Button>
+                                        <Button onClick={this.show('inverted')} className="ui submit button2">Edit Profile</Button>
                                     </div>
                                 
                                         <Modal dimmer={dimmer} open={open} onClose={this.close}>
@@ -204,12 +203,15 @@ class Profile extends React.Component {
                                     </Grid>
                                 </Grid.Column>
                             </Grid.Row>
-                            <Divider horizontal><h2>Your lifestages:</h2></Divider>
-                            <Grid.Row>
+                            {/* <Grid.Row> */}
+                                <div id="profileLsContainer">
+
+                            <h2 className="profileLS">Your lifestages:</h2>
+
                             <div id="renderLsButton">
                                 <div id="lifestageBtn">
                                     {/* <NavLink to='/lifestages'> */}
-                                    <Button onClick={this.handleLifestageClick} id="lsButton" animated className="ui prof button">
+                                        <Button onClick={this.handleLifestageClick} id="lsButton" animated className="ui submit button2">
                                         <Button.Content visible>See More Lifestages</Button.Content>
                                     <Button.Content hidden>
                                             <Icon name='arrow right' />
@@ -219,7 +221,8 @@ class Profile extends React.Component {
                                 </div>
                             </div>
                                     {this.renderLifestage()}
-                            </Grid.Row>
+                                </div>
+                            {/* </Grid.Row> */}
                         </Grid>
                     </Container>
                 </div>
