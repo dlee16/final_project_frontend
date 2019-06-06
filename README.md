@@ -14,6 +14,7 @@ So bring the encouragment and know that you are exactly where you need to be in 
 * React frontend
 * Redux
 * Ruby on Rails backend
+* B-Crypt
 * HTML5
 * Custom CSS
 * Semantic UI
