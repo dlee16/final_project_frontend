@@ -1,4 +1,4 @@
-##About
+## About
 
 Welcome to Lifestage Q or LQ for short (named after IQ and EQ)! 
 
@@ -10,13 +10,13 @@ It's about forming a community where users can encourage each other and know tha
 
 So bring the encouragment and know that you are exactly where you need to be in life. Don't give up!
 
-##Languages, Frameworks and Packages
--React frontend
--Redux
--Ruby on Rails backend
--HTML5
--Custom CSS
--Semantic UI
+## Languages, Frameworks and Packages
+* React frontend
+* Redux
+* Ruby on Rails backend
+* HTML5
+* Custom CSS
+* Semantic UI
 
-##Backend GitHub link:
+## Backend GitHub link:
 * [Backend Code](https://github.com/dlee16/final_project_backend)
