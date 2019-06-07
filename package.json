@@ -8,12 +8,16 @@
   },
   "dependencies": {
     "react": "^16.8.6",
+    "react-actioncable-provider": "github:ihollander/react-actioncable-provider",
     "react-dom": "^16.8.6",
     "react-redux": "^7.0.3",
     "react-router-dom": "^5.0.0",
     "react-scripts": "3.0.1",
     "redux": "^4.0.1",
-    "redux-thunk": "^2.3.0"
+    "redux-thunk": "^2.3.0",
+    "semantic-ui": "^2.4.2",
+    "semantic-ui-css": "^2.2.10",
+    "semantic-ui-react": "^0.87.1"
   },
   "scripts": {
     "start": "react-scripts start",
@@ -35,5 +39,8 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "gulp": "^3.9.1"
   }
 }

@@ -4,19 +4,23 @@ import './index.css';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
 import { BrowserRouter } from 'react-router-dom';
-import { createStore, applyMiddleware } from 'redux';
+import { createStore } from 'redux';
 import reducer from './Reducer';
 import { Provider } from 'react-redux';
-import thunk from 'redux-thunk';
+import 'semantic-ui-css/semantic.min.css';
+import { ActionCableProvider } from 'react-actioncable-provider'
 
-const store = createStore(reducer, applyMiddleware(thunk))
+const store = createStore(reducer, window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()) 
+
 store.dispatch({type:"ADD_GROUPLIST"})
 
 ReactDOM.render(
     <BrowserRouter>
-        <Provider store={store}>
-            < App />
-        </Provider>
+        <ActionCableProvider url={"ws://localhost:3000/socket"}>
+            <Provider store={store}>
+                < App />
+            </Provider>
+        </ActionCableProvider>
     </BrowserRouter>, 
     document.getElementById('root'));
 
