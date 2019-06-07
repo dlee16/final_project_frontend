@@ -15,7 +15,7 @@ class UpdateUser extends React.Component{
     updateUser = (id, name, username, fun_fact, email) => {
         const token = localStorage.getItem("token")
         if (token) {
-            fetch(`http://localhost:3000/users/${id}`, {
+            fetch(`https://lqbackend.herokuapp.com/users/${id}`, {
                 method: "PATCH",
                 headers: {
                     "Authorization": token,
@@ -77,25 +77,6 @@ class UpdateUser extends React.Component{
                 </Form>
                 </Container>
             </div>
-
-
-
-
-
-
-
-            //    <form onSubmit ={this.handleSubmit}>
-            //        Name: <input type="text" onChange={this.handleChange} value={this.props.currentUser.name}/>
-            //        <br/>
-            //         Email: <input type="text" onChange={this.handleChange} value={this.props.currentUser.email}/>
-            //         <br/>
-            //         FunFact:<textarea onChange={this.handleChange} value={this.props.currentUser.fun_fact}></textarea>  
-            //        <br/>
-            //         Username: <input type="text" onChange={this.handleChange} value={this.props.currentUser.username}/>
-            //        <br/>
-            //         Password: <input type="password" onChange={this.handleChange} value={this.props.currentUser.password ? this.props.currentUser.password : "" }  />
-            //    </form>
-            // </div>
         )
     }
 }

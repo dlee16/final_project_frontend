@@ -9,7 +9,7 @@ class Comment extends React.Component {
      handleDeleteClick = (id) => {
         const token = localStorage.getItem("token")
         if (token) {
-            fetch(`http://localhost:3000/comments/${id}`, {
+            fetch(`https://lqbackend.herokuapp.com/comments/${id}`, {
                 method: "DELETE",
                 headers: {
                     "Authorization": token

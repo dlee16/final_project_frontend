@@ -15,7 +15,7 @@ class GroupList extends React.Component {
     }
 
     componentDidMount() {
-        fetch(`http://localhost:3000/groups`)
+        fetch(`https://lqbackend.herokuapp.com/groups`)
         .then(res => res.json())
         .then(this.props.getGroups)
     }
@@ -39,7 +39,7 @@ class GroupList extends React.Component {
     }
 
     addGroupList = (id, name, description) => {
-        fetch('http://localhost:3000/groups', {
+        fetch('https://lqbackend.herokuapp.com/groups', {
             method: 'POST',
             headers:{
                 "Content-Type": "application/json",

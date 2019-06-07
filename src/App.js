@@ -16,43 +16,10 @@ import Home from './components/Home';
 
 class App extends React.Component {
 
-  // logOut = () => {
-  //   localStorage.removeItem("token")
-  //   this.props.setCurrentUser(null)
-  //   this.props.history.push("/")
-  // }
-
   componentDidMount(){
-    // const token = localStorage.getItem("token")
-    // if (token){
-    //   Promise.all([fetch("http://localhost:3000/auto_login", {
-    //     headers: {
-    //       "Authorization": token
-    //     }
-      // }), fetch('http://localhost:3000/comments'), fetch('http://localhost:3000/memberships'), fetch('http://localhost:3000/lifestages'), fetch('http://localhost:3000/groups')])
-      //   .then(([res1, res2, res3, res4, res5]) => {
-      //     return Promise.all([res1.json(), res2.json(), res3.json(), res4.json(), res5.json()])
-      //   })
-      //   .then(([res1, res2, res3, res4, res5]) => {
-      //     if (res1.errors){
-      //       alert(res1.errors)
-      //     } else {
-      //       this.props.setCurrentUser(res1)
-      //       }
-      //     this.props.setComments(res2)
-      //     this.props.getUserLifestages(res3)
-      //     this.props.getLifestages(res4)
-      //     this.props.getGroups(res5)
-      //     }
-    //     )
-    //   }
-
-
-
     const token = localStorage.getItem("token")
-    // debugger
     if (token){
-      fetch("http://localhost:3000/auto_login", {
+      fetch("https://lqbackend.herokuapp.com/auto_login", {
         headers: {
           "Authorization": token
         }
@@ -68,7 +35,7 @@ class App extends React.Component {
         )
       }
 
-    Promise.all([fetch('http://localhost:3000/comments'), fetch('http://localhost:3000/memberships'), fetch('http://localhost:3000/lifestages'), fetch('http://localhost:3000/groups')])
+    Promise.all([fetch('https://lqbackend.herokuapp.com/comments'), fetch('https://lqbackend.herokuapp.com/memberships'), fetch('https://lqbackend.herokuapp.com/lifestages'), fetch('https://lqbackend.herokuapp.com/groups')])
       .then(([res1, res2, res3, res4]) => {
       return Promise.all([res1.json(), res2.json(), res3.json(), res4.json()])
     })
@@ -81,7 +48,7 @@ class App extends React.Component {
   }
 
   createUser = (user) => {
-    fetch("http://localhost:3000/users", {
+    fetch("https://lqbackend.herokuapp.com/users", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -95,6 +62,7 @@ class App extends React.Component {
           alert(response.errors)
         } else {
           this.setUserForNewUser(response)
+          this.props.history.push('/lifestages')
         }
       })
   }
@@ -103,15 +71,7 @@ class App extends React.Component {
   setCurrentUser = (response) => {
     this.props.setCurrentUser(response.user)
     localStorage.setItem("token", response.token)
-    // debugger
     this.props.history.push(`/${this.props.currentUser.id}/profile`)
-    // this.props.history.push(`/${this.state.currentUser.id}/profile`)
-    // this.setState({
-    //   currentUser: response.user
-    // }, () => {
-    //   localStorage.setItem("token", response.token)
-    //     this.props.history.push(`/${this.state.currentUser.id}/profile`)
-    // })
   }
 
   setUserForNewUser = (response) => {
@@ -124,9 +84,6 @@ class App extends React.Component {
   render() {
     return (
       <div className="App">
-        {/* <Header /> */}
-        {/* <Nav logOut={this.logOut}/>  */}
-        {/* <Nav currentUser ={this.state.currentUser} logOut={this.logOut}/>  */}
         <Switch>
           <Route path={this.props.currentUser ? `/${this.props.currentUser.id}/profile` : '/login'} component= {Profile}/>  
 

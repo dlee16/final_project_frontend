@@ -7,7 +7,7 @@ import withAuth from './WithAuth';
 class Group extends React.Component {
 
     addUserToGroup =(user_id, group_id) => {
-        fetch("http://localhost:3000/memberships", {
+        fetch("https://lqbackend.herokuapp.com/memberships", {
             method: 'POST',
             headers: {
                 "Content-Type": "application/json",
@@ -30,7 +30,7 @@ class Group extends React.Component {
         
         const token = localStorage.getItem("token")
         if (token) {
-            fetch(`http://localhost:3000/memberships/${id}`, {
+            fetch(`https://lqbackend.herokuapp.com/memberships/${id}`, {
                 method: "DELETE",
                 headers: {
                     "Authorization": token

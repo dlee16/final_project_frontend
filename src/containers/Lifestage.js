@@ -13,20 +13,8 @@ class Lifestage extends React.Component {
         userLifestages: []
     }
 
-    // componentDidMount = () => {
-    //     fetch('http://localhost:3000/lifestages')
-    //     .then(res => res.json())
-    //     .then((response) => {
-    //         this.props.getLifestages(response)
-    //         if (this.props.currentUser){
-    //             const filteredLs = this.props.lifestage.filter(ls => ls.users.map(u => u.id).includes(this.props.currentUser.id))
-    //             this.props.getAllUserLifestages(filteredLs)
-    //         }
-    //     })
-    // }
-
     addUserLifestage = (id, user) => {
-        fetch('http://localhost:3000/user_lifestages', {
+        fetch('https://lqbackend.herokuapp.com/user_lifestages', {
             method: 'POST',
             headers: {
                 "Content-Type": "application/json",
@@ -64,48 +52,22 @@ class Lifestage extends React.Component {
     
     }
 
-
-    // renderButtonText = () => {
-    //     if (this.props.lifestage.length > 0 && this.props.currentUser){
-    //         // debugger
-            
-    //         if (this.props.lifestage.filter(ls => ls.users.map(u => u.id).includes(this.props.currentUser.id))){
-    //             return (
-    //                 <div>
-    //                     <button onClick={this.handleClick} className="ui fluid  submit button">Joined! See all groups</button>
-    //                     <br />
-    //                 </div>
-    //             )
-    //         } else {
-    //             return <button onClick={this.handleClick} className="ui fluid submit button">Join</button>
-    //         }
-    //     }
-    // }
     
     renderLifestage = () => {
-        // const userLifestage= this.props.lifestage.filter(ls => ls.users.map(u => u.id).includes(this.props.currentUser.id))
-
+      
 
         const usls = this.props.lifestage.filter(ls => this.props.currentUser.lifestages.find(userls => userls.id === ls.id))
         
         const new_usls = usls.map(ls => ls.id)
 
         if (this.props.lifestage.length > 0 && this.props.currentUser.id){
-        // return this.props.lifestage.map(ls => {
-            // debugger
-            // if (userLifestage.map(ls => ls.id).includes(ls.id)){
+        
             return (
                 this.props.lifestage.map(ls =>{
                     if (new_usls.includes(ls.id)) {
                         return (         
-                            // <div key={v4()} >
+                           
                             <div key={v4()} id="test3" >
-                                    {/* <div className="step-wrap">
-                                        <div className="steps-stops">
-                                            <div className="verticle-line"></div>
-                                        </div>
-                                    </div> */}
-                                    
                                 <div id="lsContainer">
 
                                     <div id="lsCircle">
@@ -134,18 +96,11 @@ class Lifestage extends React.Component {
 
                             </div>
                         </div>
-                                // </div>
                             
                             
                         )} else {
                         return (
-                            // <div key={v4()} >
                                 <div key ={v4()} >
-                                    {/* <div className="step-wrap">
-                                        <div className="steps-stops">
-                                            <div className="verticle-line"></div>
-                                        </div>
-                                    </div> */}
                                 <div id="lsContainer">
                                 <div id="lsCircle">
 
@@ -174,7 +129,6 @@ class Lifestage extends React.Component {
                                     </div>
                                 </div>
                             </div>
-                            // </div>
                         )
                     }
                     }))}
@@ -197,43 +151,6 @@ class Lifestage extends React.Component {
                
             </div>
             </div>
-            // <section id="process">
-            //     <div className="row">
-            //         <div className="section-heading">
-            //         <h2 className="text-center">Join a lifestage:</h2>
-            //         </div>
-            //     </div>
-            //     <div className="container-fluid">
-            //         <div className="row">
-            //         <div className="steps-timeline text-center">
-            //                 {this.renderLifestage()}
-            //         </div>
-            //         </div>
-            //     </div>
-            // </section>
-
-
-
-
-
-                
-            
-                    // <button> Back to Profile</button>
-                    
-                /* <select name="" id="">
-                    <option selected ="selected" defaultValue value='' disabled>Select your lifestage...</option>
-                    <option value="college_grad">Recent College Graduate</option>
-                    <option value="career">Career Change</option>
-                    <option value="marriage">Marriage</option>
-                    <option value="divorce">Divorce</option>
-                    <option value="child">Having a child</option>
-                    <option value="retirement">Retirement</option>
-                    <option value="death">Death of a loved one</option>
-                </select>
-                */
-
-           
-        //  <React.Fragment>
         )
     }  
 }
