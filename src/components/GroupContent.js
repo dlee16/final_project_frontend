@@ -18,20 +18,6 @@ class GroupContent extends React.Component{
         input:""
     }
 
-    // show = dimmer => () => this.setState({
-    //     dimmer, open: true
-    // })
-
-    // close = () => this.setState({
-    //     open: false
-    // })
-
-    // componentDidMount() {
-    //     fetch(`http://localhost:3000/comments`)
-    //     .then(res => res.json())
-    //     .then(this.props.setComments)
-    // }
-
     handleCommentInput = (comment) => {
         this.setState({
             input: comment
@@ -39,7 +25,7 @@ class GroupContent extends React.Component{
     }
 
     addingComment = (user_id, group_id, input) => {
-        fetch('http://localhost:3000/comments', {
+        fetch('https://lqbackend.herokuapp.com/comments', {
             method: 'POST', 
             headers: {
                 "Content-Type": "application/json"
@@ -50,8 +36,6 @@ class GroupContent extends React.Component{
                 user_comment: input
             }),
         })
-        // .then(res => res.json())
-        // .then((response)=> this.props.addComment(response))
     }
 
     handleSubmit = (input) => {
@@ -61,7 +45,7 @@ class GroupContent extends React.Component{
     editComment = (id, input) => {
         const token = localStorage.getItem("token")
         if (token) {
-            fetch(`http://localhost:3000/comments/${id}`, {
+            fetch(`https://lqbackend.herokuapp.com/comments/${id}`, {
                 method: "PATCH",
                 headers: {
                     "Authorization": token,
@@ -88,7 +72,7 @@ class GroupContent extends React.Component{
     renderComments = () => {
        
         if (this.props.comments.length === 0) {
-            fetch('http://localhost:3000/comments')
+            fetch('https://lqbackend.herokuapp.com/comments')
             .then(res => res.json())
             .then(response => this.props.setComments(response))
         } else {
@@ -123,7 +107,6 @@ class GroupContent extends React.Component{
         
     render(){ 
        const groupTopic= this.props.group.find(group => group.id === parseInt(this.props.match.params.id)) 
-        // const { open, dimmer } = this.state
       
         return (
             <div id="div1">
@@ -151,29 +134,6 @@ class GroupContent extends React.Component{
                             <Grid.Column width={6}>
                                 <CommentForm handleEditCommentClick={this.handleEditCommentClick} handleSubmit={this.handleSubmit} value={this.state.editComment} handleCommentInput={this.handleCommentInput} input={this.state.input}/> 
                                 
-                                {/* <Divider />
-                                <div id="div7">
-                                    <Button onClick={this.show('inverted')} className="ui prof button">See all members of group</Button> */}
-
-                                    {/* <Modal dimmer={dimmer} open={open} onClose={this.close}>
-                                        <Modal.Header>Members:</Modal.Header>
-                                        <Modal.Content>
-                                            <Modal.Description>
-                                               { this.renderMembers()}
-                                            </Modal.Description>
-                                        </Modal.Content>
-                                        <Modal.Actions>
-                                            <Button color='black' onClick={this.close}>
-                                                Close
-                                                </Button>
-                                        </Modal.Actions>
-                                    </Modal> */}
-
-
-                                {/* </div> */}
-                                {/* <div>
-                                    <Button onClick={this.handleBackButton} className="ui prof button">Back to Profile</Button>
-                                </div> */}
                             </Grid.Column>
                             </div>
                         </Grid>

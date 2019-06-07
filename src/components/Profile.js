@@ -23,7 +23,7 @@ class Profile extends React.Component {
     })
 
    componentDidMount = () => {
-       Promise.all([fetch('http://localhost:3000/user_lifestages'), fetch('http://localhost:3000/memberships'), fetch('http://localhost:3000/lifestages')])
+       Promise.all([fetch('https://lqbackend.herokuapp.com/user_lifestages'), fetch('https://lqbackend.herokuapp.com/memberships'), fetch('https://lqbackend.herokuapp.com/lifestages')])
            .then(([res1, res2, res3]) => {
                 return Promise.all([res1.json(), res2.json(), res3.json()])
             })
@@ -61,7 +61,7 @@ class Profile extends React.Component {
     handleDeleteClick = (id) => {
         const token = localStorage.getItem("token")
         if (token) {
-            fetch(`http://localhost:3000/user_lifestages/${id}`, {
+            fetch(`https://lqbackend.herokuapp.com/user_lifestages/${id}`, {
                 method: "DELETE",
                 headers: {
                     "Authorization": token
@@ -83,26 +83,12 @@ class Profile extends React.Component {
         
                 if (usergroups.length === 0){
                     this.props.history.push(`/lifestages/${lifestageId}/usergrouplist`)
-                    // alert("you're not a member of any groups yet!")
                 } else{
                     this.props.getProfileUserGroups(usergroups)
                     this.props.history.push(`/lifestages/${lifestageId}/usergrouplist`)
                 } 
         }
-            // else {
-            //     const userMemberships = this.props.allMemberships.filter(m => m.user_id === this.props.currentUser.id)
-            //      this.props.getProfileUserGroups(userMemberships)
-            //     const userLifestages = this.props.profileUserGroups.filter(ls => ls.group.lifestage_name === e.target.name)
-            //     if (userLifestages.length === 0) {
-            //         alert("you're not a member of any groups yet!")
-            //     } else {
-            //         this.props.getProfileUserGroups(userLifestages)
-            //         const lsId = parseInt(userLifestages[0].group.lifestage_id)
-            //         // this.props.getLifestageId(lsId)
-            //         this.props.history.push(`/lifestages/${lsId}/usergrouplist`)
-            //     }
-            // }
-        }
+    }
 
     renderLifestage = () => {
         if (this.props.newProfileUserLifestages.length !== 0){
@@ -203,26 +189,26 @@ class Profile extends React.Component {
                                     </Grid>
                                 </Grid.Column>
                             </Grid.Row>
-                            {/* <Grid.Row> */}
+                            
                                 <div id="profileLsContainer">
 
                             <h2 className="profileLS">Your lifestages:</h2>
 
                             <div id="renderLsButton">
                                 <div id="lifestageBtn">
-                                    {/* <NavLink to='/lifestages'> */}
+                                    
                                         <Button onClick={this.handleLifestageClick} id="lsButton" animated className="ui submit button2">
                                         <Button.Content visible>See More Lifestages</Button.Content>
                                     <Button.Content hidden>
                                             <Icon name='arrow right' />
                                         </Button.Content>
                                     </Button>
-                                    {/* </NavLink> */}
+                                    
                                 </div>
                             </div>
                                     {this.renderLifestage()}
                                 </div>
-                            {/* </Grid.Row> */}
+                            
                         </Grid>
                     </Container>
                 </div>

@@ -28,7 +28,7 @@ class Login extends React.Component{
     handleSubmit = (e) => {
         e.preventDefault()
 
-        fetch('http://localhost:3000/login', {
+        fetch('https://lqbackend.herokuapp.com/login', {
             method: 'POST',
             headers: {
                 "Content-Type": "application/json",
@@ -87,19 +87,5 @@ class Login extends React.Component{
         )
     }
 }
-
-// const mapStateToProps = (state) => {
-//     return {
-//         currentUser: state.currentUser
-//     }
-// }
-
-// const mapDispatchToProps = (dispatch) => {
-//     return {
-//         setCurrentUser: (user) => {
-//             dispatch(setCurrentUser(user))
-//         }
-//     }
-// }
 
 export default Login

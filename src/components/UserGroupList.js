@@ -8,21 +8,10 @@ import Nav from './Nav';
 
 class UserGroupList extends React.Component{
 
-    // componentDidMount = ()=>  {
-    //     fetch(`http://localhost:3000/memberships`)
-    //     .then(res => res.json())
-    //     .then((response) => {
-    //         this.props.getMemberships(response)
-    //         const userMemberships = this.props.allMemberships.filter(m => m.user_id === this.props.currentUser.id)
-
-    //         this.props.getProfileUserGroups(userMemberships)
-    //     })
-    // }
-
     renderGroups = () => {
         const lifestageId = this.props.match.params.lifestage_id
         if (this.props.profileUserGroups.length === 0 && this.props.currentUser){
-            fetch(`http://localhost:3000/memberships`)
+            fetch(`https://lqbackend.herokuapp.com/memberships`)
                 .then(res => res.json())
                 .then((response) => {
                     this.props.getMemberships(response)
