@@ -21,3 +21,6 @@ So bring the encouragment and know that you are exactly where you need to be in 
 
 ## Backend GitHub link:
 * [Backend Code](https://github.com/dlee16/final_project_backend)
+
+## Homepage animation:
+This was adapted from https://codepen.io/smk1985/pen/gqMrzY
