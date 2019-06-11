@@ -10,6 +10,8 @@ It's about forming a community where users can encourage each other and know tha
 
 So bring the encouragment and know that you are exactly where you need to be in life. Don't give up!
 
+[Click here to join Lifestage Q!](https://lifestage-q.herokuapp.com/)
+
 ## Languages, Frameworks and Packages
 * React frontend
 * Redux
