@@ -18,7 +18,6 @@ const Nav = (props) => {
                         <NavLink to={`/${props.currentUser.id}/profile`} className="right item"> My Profile </NavLink>
                         <NavLink to='/' onClick={logOut} className=" right item"> Log Out</NavLink>
                         <NavLink to='/about' className="right item"> About</NavLink>
-                        <NavLink to='/' className="right item"> Home</NavLink>
                 </div>
             </div>
         </div>
