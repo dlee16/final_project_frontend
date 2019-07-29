@@ -78,8 +78,8 @@ class Login extends React.Component{
                 </div>
 
                     <div className="middle aligned column">
-                        New to us?  
-                        <button onClick={this.handleSignUpClick} >Sign Up </button>
+                        New to us? 
+                        <button className="ui tiny submit button" onClick={this.handleSignUpClick} >Sign Up </button>
                     </div>
             </div>
         </div>

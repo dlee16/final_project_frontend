@@ -7,11 +7,12 @@
     "node": "10.15.3"
   },
   "dependencies": {
+    "querystringify": ">=2.0.0",
     "react": "^16.8.6",
     "react-actioncable-provider": "github:ihollander/react-actioncable-provider",
     "react-dom": "^16.8.6",
     "react-redux": "^7.0.3",
-    "react-router-dom": "^5.0.0",
+    "react-router-dom": "^5.0.1",
     "react-scripts": "3.0.1",
     "redux": "^4.0.1",
     "redux-thunk": "^2.3.0",
@@ -41,7 +42,6 @@
     ]
   },
   "devDependencies": {
-    "gulp": "^3.9.1",
-    "querystringify": ">=2.0.0"
+    "gulp": "^3.9.1"
   }
 }

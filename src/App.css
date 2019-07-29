@@ -49,9 +49,6 @@ h2,h3,h4,h5{
   color: white;
 }
 
-
-
-
 .ui.login.image.header{
   color: #e8347d;
 }
@@ -69,32 +66,39 @@ h2,h3,h4,h5{
 .ui.join.button{
   background-color: #00B0F5;
   color: white;
-  margin: 10%;
+  /* margin-left: 10%; */
+  text-align: center;
  
 }
 
 .group.card{
-  background-color: #00B0F5
+  background-color: #00B0F5;
 }
 
-/* .ui.container{
-  background: rgba(204, 204, 204, 0.5)
-  
-} */
 .profileLS{
-margin-left: 30px;
+margin-left: 50%;
+transform: translate(-50%);
 align-content: stretch;
 width: 70vw;
 }
 /* group cards */
 #lsButton{
-  /* margin-left: 10%; */
-  /* background: purple; */
+  margin-right: 1%;
+  /* text-align: center; */
   /* width: 60vw; */
 }
+
 #lsCard{
-/* background: black; */
-display: flex
+display: flex;
+}
+
+#lsCard1{
+display: flex;
+align-content: center;
+justify-content: space-between, center;
+flex-wrap: wrap;
+margin-left: 7%;
+margin-top: 3%;
 }
 
 #renderLsButton{
@@ -102,7 +106,7 @@ display: flex
   width: 130vh;
 }
 #test2{
-  height: 6vh;
+  height: 6vh;  
 }
 
 #borderimg1 {
@@ -110,8 +114,7 @@ display: flex
   padding: 15px;
   border-image: url(/border1.png) 30 round;
   margin-top: 6%;
-  margin-right: 2px;
-  /* background: transparent; */
+  margin-right: 20px;
   background: rgba(196, 104, 104, 0.2)
 }
 
@@ -121,7 +124,6 @@ display: flex
   border-image: url(/border1.png) 20% round;
   height: 100%;
   background: rgba(204, 204, 204, 0.2)
-  /* background: transparent; */
 }
 
 #gcard1{
@@ -254,7 +256,6 @@ padding-top: 1%;
 .flip-card {
   width: 4%;
   height: 2%;
-  /* perspective: 1000px; */
 }
 
 .flip-card-inner {
@@ -264,6 +265,7 @@ padding-top: 1%;
   text-align: center;
   transition: transform 0.6s;
   transform-style: preserve-3d;
+  z-index: 10;
 }
 
 .flip-card:hover .flip-card-inner {
@@ -276,7 +278,7 @@ padding-top: 1%;
   height: 75%;
   backface-visibility: hidden;
   border-radius: 50%;
-  margin-left: 16%;
+  margin-left: 10%;
   margin-right: 10px;
   left: -2%;
 }
@@ -296,9 +298,10 @@ padding-top: 1%;
 
 /* lifestage button */
 .lifestageButton{
-margin-top: -30%;
-padding-top: 14%;
-height:2vh;
+  position: relative;
+  text-align: center;
+  height:2vh;
+  z-index: 20;
 }
 
 
@@ -328,7 +331,7 @@ height:2vh;
   flex-wrap: wrap;
   align-content: flex-start;
   flex-flow: row wrap;
-  margin-left: 7%;
+  margin-left: 4%;
   margin-right: 7%;
   margin-top: 2%;
   padding-left: 6%;
@@ -355,7 +358,7 @@ height:2vh;
 
 #lsContainer{
   
-  height: 40vh;
+  height: 43vh;
   /* border-top: 5px double #0bc2c9; */
     padding-top: 20px;
     margin-top: 40px;
@@ -367,9 +370,9 @@ height:2vh;
 }
 
 .about{
-  /* background: blue; */
   width: 50vw;
-  margin-left: 30%;
+  margin-left: 50%;
+  transform: translate(-50%);
   border: 2px solid white;
   padding: 2%;
   background: rgba(204, 204, 204, 0.1)

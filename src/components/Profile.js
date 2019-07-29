@@ -206,7 +206,9 @@ class Profile extends React.Component {
                                     
                                 </div>
                             </div>
+                            <div id="lsCard1">
                                     {this.renderLifestage()}
+                            </div>
                                 </div>
                             
                         </Grid>
