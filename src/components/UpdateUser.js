@@ -15,7 +15,7 @@ class UpdateUser extends React.Component{
     updateUser = (id, name, username, fun_fact, email) => {
         const token = localStorage.getItem("token")
         if (token) {
-            fetch(`https://lqbackend.herokuapp.com/users/${id}`, {
+            fetch(`http://localhost:3000/users/${id}`, {
                 method: "PATCH",
                 headers: {
                     "Authorization": token,
