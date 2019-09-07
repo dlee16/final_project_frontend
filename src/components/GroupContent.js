@@ -25,7 +25,7 @@ class GroupContent extends React.Component{
     }
 
     addingComment = (user_id, group_id, input) => {
-        fetch('https://lqbackend.herokuapp.com/comments', {
+        fetch('http://localhost:3000/comments', {
             method: 'POST', 
             headers: {
                 "Content-Type": "application/json"
@@ -45,7 +45,7 @@ class GroupContent extends React.Component{
     editComment = (id, input) => {
         const token = localStorage.getItem("token")
         if (token) {
-            fetch(`https://lqbackend.herokuapp.com/comments/${id}`, {
+            fetch(`http://localhost:3000/comments/${id}`, {
                 method: "PATCH",
                 headers: {
                     "Authorization": token,
@@ -72,7 +72,7 @@ class GroupContent extends React.Component{
     renderComments = () => {
        
         if (this.props.comments.length === 0) {
-            fetch('https://lqbackend.herokuapp.com/comments')
+            fetch('http://localhost:3000/comments')
             .then(res => res.json())
             .then(response => this.props.setComments(response))
         } else {

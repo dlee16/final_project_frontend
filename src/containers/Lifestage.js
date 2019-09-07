@@ -14,7 +14,7 @@ class Lifestage extends React.Component {
     }
 
     addUserLifestage = (id, user) => {
-        fetch('https://lqbackend.herokuapp.com/user_lifestages', {
+        fetch('http://localhost:3000/user_lifestages', {
             method: 'POST',
             headers: {
                 "Content-Type": "application/json",

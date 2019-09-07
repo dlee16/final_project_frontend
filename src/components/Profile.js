@@ -23,7 +23,7 @@ class Profile extends React.Component {
     })
 
    componentDidMount = () => {
-       Promise.all([fetch('https://lqbackend.herokuapp.com/user_lifestages'), fetch('https://lqbackend.herokuapp.com/memberships'), fetch('https://lqbackend.herokuapp.com/lifestages')])
+       Promise.all([fetch('http://localhost:3000/user_lifestages'), fetch('http://localhost:3000/memberships'), fetch('http://localhost:3000/lifestages')])
            .then(([res1, res2, res3]) => {
                 return Promise.all([res1.json(), res2.json(), res3.json()])
             })
@@ -61,7 +61,7 @@ class Profile extends React.Component {
     handleDeleteClick = (id) => {
         const token = localStorage.getItem("token")
         if (token) {
-            fetch(`https://lqbackend.herokuapp.com/user_lifestages/${id}`, {
+            fetch(`http://localhost:3000/user_lifestages/${id}`, {
                 method: "DELETE",
                 headers: {
                     "Authorization": token
@@ -147,30 +147,29 @@ class Profile extends React.Component {
                                         <Image src="../profile.jpg" width="200px" height="200px"  alt="broken" circular/>
                                     </div>
                                     <div id="div10">
-
                                         <Button onClick={this.show('inverted')} className="ui submit button2">Edit Profile</Button>
                                     </div>
                                 
-                                        <Modal dimmer={dimmer} open={open} onClose={this.close}>
-                                            <Modal.Header>Edit your profile</Modal.Header>
-                                            <Modal.Content image>
-                                                <Image wrapped size='medium' width="200px" height="200px" src='../profile.jpg' />
-                                                <Modal.Description>
-                                                    <UpdateUser />
-                                                </Modal.Description>
-                                            </Modal.Content>
-                                            <Modal.Actions>
-                                                <Button color='black' onClick={this.close}>
-                                                    Close
-                                                </Button>
-                                            </Modal.Actions>
-                                        </Modal>
+                                    <Modal dimmer={dimmer} open={open} onClose={this.close}>
+                                        <Modal.Header>Edit your profile</Modal.Header>
+                                        <Modal.Content image>
+                                            <Image wrapped size='medium' width="200px" height="200px" src='../profile.jpg' />
+                                            <Modal.Description>
+                                                <UpdateUser />
+                                            </Modal.Description>
+                                        </Modal.Content>
+                                        <Modal.Actions>
+                                            <Button color='black' onClick={this.close}>
+                                                Close
+                                            </Button>
+                                        </Modal.Actions>
+                                    </Modal>
                                 </Grid.Column>
                                 <Grid.Column width={6}>
-                                        <h1>Welcome {this.props.currentUser ? this.props.currentUser.name : null} !</h1>
-                                        <Divider />
-                                        <h4>FACT: {this.props.currentUser.fun_fact}</h4>
-                                        <Divider />
+                                    <h1>Welcome {this.props.currentUser ? this.props.currentUser.name : null} !</h1>
+                                    <Divider />
+                                    <h4>FACT: {this.props.currentUser.fun_fact}</h4>
+                                    <Divider />
                                     <Grid columns={3} divided>
                                         <Grid.Row>
                                             <Grid.Column>
@@ -190,27 +189,22 @@ class Profile extends React.Component {
                                 </Grid.Column>
                             </Grid.Row>
                             
-                                <div id="profileLsContainer">
-
+                        <div id="profileLsContainer">
                             <h2 className="profileLS">Your lifestages:</h2>
-
                             <div id="renderLsButton">
                                 <div id="lifestageBtn">
-                                    
                                         <Button onClick={this.handleLifestageClick} id="lsButton" animated className="ui submit button2">
                                         <Button.Content visible>See More Lifestages</Button.Content>
-                                    <Button.Content hidden>
+                                        <Button.Content hidden>
                                             <Icon name='arrow right' />
                                         </Button.Content>
                                     </Button>
-                                    
                                 </div>
                             </div>
                             <div id="lsCard1">
-                                    {this.renderLifestage()}
+                                {this.renderLifestage()}
                             </div>
-                                </div>
-                            
+                        </div>
                         </Grid>
                     </Container>
                 </div>

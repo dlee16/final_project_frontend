@@ -11,7 +11,7 @@ class UserGroupList extends React.Component{
     renderGroups = () => {
         const lifestageId = this.props.match.params.lifestage_id
         if (this.props.profileUserGroups.length === 0 && this.props.currentUser){
-            fetch(`https://lqbackend.herokuapp.com/memberships`)
+            fetch(`http://localhost:3000/memberships`)
                 .then(res => res.json())
                 .then((response) => {
                     this.props.getMemberships(response)

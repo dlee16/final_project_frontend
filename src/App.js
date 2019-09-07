@@ -19,7 +19,7 @@ class App extends React.Component {
   componentDidMount(){
     const token = localStorage.getItem("token")
     if (token){
-      fetch("https://lqbackend.herokuapp.com/auto_login", {
+      fetch("http://localhost:3000/auto_login", {
         headers: {
           "Authorization": token
         }
@@ -35,7 +35,7 @@ class App extends React.Component {
         )
       }
 
-    Promise.all([fetch('https://lqbackend.herokuapp.com/comments'), fetch('https://lqbackend.herokuapp.com/memberships'), fetch('https://lqbackend.herokuapp.com/lifestages'), fetch('https://lqbackend.herokuapp.com/groups')])
+    Promise.all([fetch('http://localhost:3000/comments'), fetch('http://localhost:3000/memberships'), fetch('http://localhost:3000/lifestages'), fetch('http://localhost:3000/groups')])
       .then(([res1, res2, res3, res4]) => {
       return Promise.all([res1.json(), res2.json(), res3.json(), res4.json()])
     })
@@ -48,7 +48,7 @@ class App extends React.Component {
   }
 
   createUser = (user) => {
-    fetch("https://lqbackend.herokuapp.com/users", {
+    fetch("http://localhost:3000/users", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -99,13 +99,13 @@ class App extends React.Component {
 
           <Route path="/userlogin" render={(routeProps) => < Login {...routeProps} setCurrentUser={this.setCurrentUser} />} /> 
 
-          <Route path="/userlogin" component ={Login} /> 
+          {/* <Route path="/userlogin" component ={Login} />  */}
 
           <Route path="/signup" render={(routeProps) => (< SignupForm {...routeProps} createUser={this.createUser} />)} /> 
 
           <Route exact path="/About" component = {About} />
 
-          <Route exact path="/" component = {Home} /> 
+          <Route exact path="/" render={(routeProps) => <Home {...routeProps} /> }/>
 
         </Switch>
  

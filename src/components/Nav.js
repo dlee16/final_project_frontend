@@ -1,13 +1,14 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
 import { connect } from 'react-redux';
+import { setCurrentUser } from '../actions';
+
 
 const Nav = (props) => {
 
     const logOut = () => {
         localStorage.removeItem("token")
-        this.props.setCurrentUser(null)
-        this.props.history.push("/")
+        props.setCurrentUser(null)
     }
 
     return (
@@ -39,7 +40,15 @@ const mapStateToProps = (state) => {
     }
 }
 
-export default connect(mapStateToProps)(Nav)
+const mapDispatchToProps = (dispatch) => {
+    return {
+        setCurrentUser: (user) => {
+            dispatch(setCurrentUser(user))
+        }
+    }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Nav)
 
 
    
