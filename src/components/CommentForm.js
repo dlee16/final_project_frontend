@@ -27,18 +27,18 @@ class CommentForm extends React.Component {
 
     render(){
         if (this.props.updatedCommentId){
-        return(
-            <div id="div5">
-                <div id="div6">
-                    <form className="ui reply form" onSubmit={this.handleSubmit}>
-                        <textarea id="commentbkgd"  onChange={this.handleChange} value={this.props.input}></textarea>
-                    </form>
+            return(
+                <div id="div5">
+                    <div id="div6">
+                        <form className="ui reply form" onSubmit={this.handleSubmit}>
+                            <textarea id="commentbkgd"  onChange={this.handleChange} value={this.props.input}></textarea>
+                        </form>
+                    </div>
+                    <button onClick={this.handleEditClick} className="ui prof icon button">
+                        <i className="icon edit"></i>Edit your comment!</button>
                 </div>
-                <button onClick={this.handleEditClick} className="ui prof icon button">
-                    <i className="icon edit"></i>Edit your comment!</button>
-            </div>
-
-        )} else{
+        )} 
+        else{
             return(
             <div id="div5">
                 <div id="div6">
@@ -48,12 +48,9 @@ class CommentForm extends React.Component {
                             <i className="icon edit"></i>Leave a comment!</button>
                     </form>
                 </div>
-                
-        
             </div>
-
-            )}
-        
+            )
+        }
     }
 }
 

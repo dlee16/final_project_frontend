@@ -15,8 +15,8 @@ class Comment extends React.Component {
                     "Authorization": token
                 }
             })
-                .then(res => res.json())
-                .then(response => this.props.removeComment(response))
+            .then(res => res.json())
+            .then(response => this.props.removeComment(response))
         }
     }
 
@@ -43,7 +43,6 @@ class Comment extends React.Component {
     }
 
     render(){
-   
         return(
             <div >
                 <div id="comment" > 
@@ -54,15 +53,11 @@ class Comment extends React.Component {
                             </Grid.Column>
                         </div>
                         <Grid.Column >
-                            
-
                             <div id="commentBubble">
                                 <div className="speech-bubble-ds">
                                     <h4>{this.props.username}</h4>
                                     <div className="test">
-                                        {/* <Segment style={{ overflow: 'auto', maxHeight: 60 }} id="segment1"> */}
                                             {this.props.userComment}
-                                        {/* </Segment> */}
                                     </div>
                                     <div>
                                         {this.renderEditButton()}
@@ -71,10 +66,8 @@ class Comment extends React.Component {
                                     <div className="speech-bubble-ds-arrow"></div>
                                 </div>
                             </div>
-                          
                         </Grid.Column>
                     </Grid>
-                  
                 </div>
             </div> 
                
