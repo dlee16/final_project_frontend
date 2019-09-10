@@ -70,15 +70,18 @@ class GroupContent extends React.Component{
     }
 
     renderComments = () => {
-       
         if (this.props.comments.length === 0) {
             fetch('http://localhost:3000/comments')
             .then(res => res.json())
             .then(response => this.props.setComments(response))
         } else {
-            const group = this.props.comments.filter(comment => {
+            const filter = this.props.comments.filter(comment => {
                 return comment.group_id === parseInt(this.props.match.params.id)
             }) 
+            const group = filter.sort((a,b) => {
+                return b.id - a.id
+                }) 
+            console.log(group)
             if (group.length > 0){
                 return <CommentContainer key={v4()} handleCommentInput={this.handleCommentInput} group={group} />
             } else{
@@ -109,7 +112,7 @@ class GroupContent extends React.Component{
        const groupTopic= this.props.group.find(group => group.id === parseInt(this.props.match.params.id)) 
       
         return (
-            <div id="div1">
+            <div>
                 <Header />
                 <Nav /> 
                     <ActionCableConsumer
@@ -124,7 +127,6 @@ class GroupContent extends React.Component{
                     <Grid >
                             <div id="div3">
                             <Segment style={{ overflow: 'auto', minHeight: 550, maxHeight: 550 }} id="segment">
-
                                 <Grid.Column width={10}>
                                     {this.renderComments()}
                                 </Grid.Column>
